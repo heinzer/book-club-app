@@ -14,7 +14,7 @@ import { HomeComponent } from './pages/home/home.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

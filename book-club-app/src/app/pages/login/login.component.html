@@ -1,9 +1,24 @@
-<div>
-  <label>Username</label>
-  <input type="text" [(ngModel)]="username">
+<div class="login-component">
+  <h1>Welcome back to Book Club!</h1>
+  <div class="input-pair">
+    <!-- <label>Username</label> -->
+    <input type="text" placeholder="Username" [(ngModel)]="username">
+  </div>
 
-  <label>Password</label>
-  <input type="text" [(ngModel)]="password">
+  <div class="input-pair">
+    <!-- <label>Password</label> -->
+    <input [type]="hidePassword ? 'password' : 'text'" placeholder="Password" [(ngModel)]="password">
 
-  <button (click)="tryLogin()">Submit</button>
+    <!-- bug: is the entire width, toggles outside  -->
+    <div class="toggle-password-view" (click)="toggleHide()">
+      <span class="fas fa-eye" *ngIf="!hidePassword"></span>
+      <span class="fas fa-eye-slash" *ngIf="hidePassword"></span>
+    </div>
+  </div>
+
+  <button class="main-button login" (click)="tryLogin()">Submit</button>
+
+  <div class="register">
+    Not a member? <button class="main-button inline" (click)="register()">Register here</button>
+  </div>
 </div>

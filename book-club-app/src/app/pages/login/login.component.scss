@@ -1,0 +1,26 @@
+.login-component {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  width: 50%;
+  min-width: 300px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.login {
+  margin: 0 auto;
+}
+
+.register {
+  margin: 20px auto;
+}
+
+.toggle-password-view {
+  transform: translateY(-35px);
+  padding-right: 30px;
+  color: var(--gray);
+  text-align: right;
+}

@@ -12,9 +12,15 @@ export class LoginComponent implements OnInit {
   password: string = "";
   error: any = "";
 
+  hidePassword: boolean = true;
+
   constructor(public auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  toggleHide() {
+    this.hidePassword = !this.hidePassword;
   }
 
   tryLogin() {
@@ -24,6 +30,10 @@ export class LoginComponent implements OnInit {
     }).catch(e => {
       this.error = e;
     });
+  }
+
+  register() {
+
   }
 
 }

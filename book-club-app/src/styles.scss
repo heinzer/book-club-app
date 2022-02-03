@@ -1,1 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Begin font imports */
+@font-face {
+  font-family: RobotoSlab-Bold;
+  src: url("assets/fonts/RobotoSlab/RobotoSlab-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: RobotoSlab-Light;
+  src: url("assets/fonts/RobotoSlab/RobotoSlab-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: RobotoSlab-Regular;
+  src: url("assets/fonts/RobotoSlab/RobotoSlab-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: RobotoSlab-Thin;
+  src: url("assets/fonts/RobotoSlab/RobotoSlab-Thin.ttf") format("truetype");
+}
+
+/* Begin color definitions */
+:root {
+  --lightgray: #B6B6B6;
+  --gray: #747474;
+  --black: #3E3E3E;
+  --darkblue: #0F5880;
+}
+
+/* Begin global styles */
+body {
+  font-family: RobotoSlab-Regular;
+  color: var(--black);
+}
+
+.main-button {
+  background-color: var(--darkblue);
+  color: white;
+  width: inherit;
+  padding: 10px;
+  font-family: RobotoSlab-Regular;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+}
+
+.main-button.inline {
+  background-color: transparent;
+  color: var(--darkblue);
+  padding: 0px 0px 0px 5px;
+  font-size: 16px;
+}
+.main-button.inline:hover {
+  transition: 0.2s all;
+  font-family: RobotoSlab-Bold;
+}
+
+input {
+  border: 1px solid var(--lightgray);
+  height: 25px;
+  font-family: RobotoSlab-Regular;
+  padding: 10px;
+}
+input:focus {
+  border: 1px solid var(--darkblue);
+}
+
+.input-pair {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.input-pair label {
+
+}
+.input-pair input {
+
+}

@@ -1,0 +1,14 @@
+.navbar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.navbar .nav-item {
+  color: var(--gray);
+  text-decoration: none;
+  transition: 0.2s all;
+}
+.navbar .nav-item:hover {
+  color: var(--darkblue);
+}

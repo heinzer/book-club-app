@@ -29,8 +29,7 @@ export class AuthService {
         "email": email,
         "password": password,
         "username": username
-      }),
-      { headers: {'Content-Type': 'application/json; charset=utf-8'} })
+      }))
     .toPromise().then(data => {
       // this.currentUser = User.parseUser(data);
       // this.events.publish('successfulLogin');
@@ -43,8 +42,7 @@ export class AuthService {
       JSON.stringify({
         "username": username,
         "password": password
-      }),
-      { headers: {'Content-Type': 'application/json; charset=utf-8'} })
+      }))
     .toPromise().then(d => {
       // TODO this bullshit is for some reason needed to be able to access the
       //   keys on data, passed from the api

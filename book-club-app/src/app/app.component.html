@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark">
-  <a class="nav-item nav-link" routerLink="/">Home</a>
-  <a class="nav-item nav-link" routerLink="/login">Login</a>
+  <a class="nav-item nav-link" routerLink="/" *ngIf="auth.currentUser">Home</a>
+  <a class="nav-item nav-link" routerLink="/login" *ngIf="!auth.currentUser">Login</a>
 </nav>
 
 <!-- main content container -->

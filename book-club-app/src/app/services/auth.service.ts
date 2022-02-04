@@ -45,14 +45,27 @@ export class AuthService {
         "password": password
       }),
       { headers: {'Content-Type': 'application/json; charset=utf-8'} })
-    .toPromise().then(data => {
+    .toPromise().then(d => {
       // TODO this bullshit is for some reason needed to be able to access the
       //   keys on data, passed from the api
-      let d: {[k: string]: any} = {};
-      Object.assign(d, data);
+      let data: {[k: string]: any} = {};
+      Object.assign(data, d);
 
-      this.token = d["access_token"];
-      return;
+      this.token = data["access_token"];
+      return this.me();
+    });
+  }
+
+  me() {
+    return this.http.get(`${this.baseUrl}/profile`)
+    .toPromise().then(d => {
+      // TODO this bullshit is for some reason needed to be able to access the
+      //   keys on data, passed from the api
+      let data: {[k: string]: any} = {};
+      Object.assign(data, d);
+
+      this.currentUser = new User(data["username"], data["email"])
+      return this.currentUser;
     });
   }
 }

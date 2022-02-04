@@ -1,11 +1,11 @@
 export interface UserI {
-  email: string;
   username: string;
+  email?: string;
 }
 export class User implements UserI {
   email: string = "";
   username: string = "";
-  constructor(email:string, username:string){
+  constructor(username:string, email:string){
     this.email = email;
     this.username = username;
   }

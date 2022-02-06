@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  username: string = "";
+  email: string = "";
   password: string = "";
   error: any = "";
 
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   tryLogin() {
-    this.auth.login(this.username, this.password)
+    this.auth.login(this.email, this.password)
     .then(r => {
       this.router.navigate(['/']);
     }).catch(e => {

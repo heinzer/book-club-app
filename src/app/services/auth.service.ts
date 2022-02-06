@@ -23,12 +23,11 @@ export class AuthService {
     this.token = authToken;
   }
 
-  register(email:string, password:string, username:string) {
+  register(email:string, password:string) {
     return this.http.post(`${this.baseUrl}/user`,
       JSON.stringify({
         "email": email,
-        "password": password,
-        "username": username
+        "password": password
       }))
     .toPromise().then(data => {
       // this.currentUser = User.parseUser(data);
@@ -37,10 +36,10 @@ export class AuthService {
     });
   }
 
-  login(username:string, password:string) {
-    return this.http.post(`${this.baseUrl}/auth/login`,
+  login(email:string, password:string) {
+    return this.http.post(`${this.baseUrl}/login`,
       JSON.stringify({
-        "username": username,
+        "email": email,
         "password": password
       }))
     .toPromise().then(d => {
@@ -62,7 +61,7 @@ export class AuthService {
       let data: {[k: string]: any} = {};
       Object.assign(data, d);
 
-      this.currentUser = new User(data["username"], data["email"])
+      this.currentUser = new User(data["email"])
       return this.currentUser;
     });
   }

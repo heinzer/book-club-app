@@ -1,0 +1,58 @@
+.home-component {
+  .row {
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+
+    .left {
+      display: flex;
+      align-items: flex-end;
+
+      h3 {
+        margin: 0px;
+      }
+
+      .new {
+        margin-left: 10px;
+        color: var(--green);
+        transition: 0.2 all;
+        opacity: 0.4;
+
+        :hover {
+          opacity: 1;
+        }
+      }
+    }
+    .input-pair {
+      margin-bottom: 0px;
+    }
+  }
+
+  .club {
+    border: 1px solid var(--lightgray);
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 20px 20px;
+    padding: 20px;
+
+    h2 {
+      margin: 0px;
+    }
+    p {
+      margin: 0px;
+    }
+
+    .left {
+      :nth-child(2) {
+        margin: 10px 0px;
+      }
+    }
+
+    .right {
+      justify-content: space-between;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { ApiService } from './services/api.service';
 import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,15 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
   title = 'book-club-app';
 
-  constructor(public auth: AuthService) {
-    
+  constructor(public api: ApiService, public auth: AuthService, private router: Router) {
+    const possibleToken = this.api.loadToken();
+    if (possibleToken) {
+      this.auth.me()
+      .then(user => {
+        // this.router.navigate(['/']);
+      }).catch(err => {
+        this.router.navigate(['/login']);
+      });
+    }
   }
 }

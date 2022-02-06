@@ -1,14 +1,25 @@
 .navbar {
   display: flex;
-  width: 100%;
+  padding: 10px 20px;
   justify-content: space-between;
+  background-color: var(--darkblue);
+}
+
+.navbar .left a {
+  margin-right: 10px;
+}
+.navbar .right a {
+  margin-left: 10px;
 }
 
 .navbar .nav-item {
-  color: var(--gray);
+  color: white;
   text-decoration: none;
   transition: 0.2s all;
 }
 .navbar .nav-item:hover {
   color: var(--darkblue);
+}
+.navbar .nav-item .fas {
+  color: white;
 }

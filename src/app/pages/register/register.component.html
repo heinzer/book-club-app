@@ -1,1 +1,24 @@
-<p>register works!</p>
+<div class="register-component">
+  <h1>Sign up for Book Club!</h1>
+  <div class="input-pair">
+    <!-- <label>Email</label> -->
+    <input type="text" placeholder="Email" [(ngModel)]="email">
+  </div>
+
+  <div class="input-pair">
+    <!-- <label>Password</label> -->
+    <input [type]="hidePassword ? 'password' : 'text'" placeholder="Password" [(ngModel)]="password">
+
+    <!-- bug: is the entire width, toggles outside  -->
+    <div class="toggle-password-view" (click)="toggleHide()">
+      <span class="fas fa-eye" *ngIf="!hidePassword"></span>
+      <span class="fas fa-eye-slash" *ngIf="hidePassword"></span>
+    </div>
+  </div>
+
+  <button class="main-button login" (click)="tryRegister()">Sign up</button>
+
+  <div class="login">
+    Already a member? <button class="main-button inline" (click)="login()">Login here</button>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,9 +15,12 @@ export class LoginComponent implements OnInit {
 
   hidePassword: boolean = true;
 
-  constructor(public auth: AuthService, private router: Router) { }
+  constructor(public auth: AuthService, public api: ApiService, private router: Router) { }
 
   ngOnInit(): void {
+    if (this.api.currentUser) {
+      this.router.navigate(['/']);
+    }
   }
 
   toggleHide() {

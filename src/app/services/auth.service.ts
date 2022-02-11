@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../models/data-models';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { RegistrationResponse, User } from '../models/data-models';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -14,21 +16,14 @@ export class AuthService {
     }
   }
 
-  register(email:string, password:string) {
-    return this.http.post(`${this.api.baseUrl}/user`,
+  register(firstName: string, email:string, password:string): Observable<RegistrationResponse> {
+    return this.http.post<RegistrationResponse>(`${this.api.baseUrl}/register`,
       JSON.stringify({
+        "firstName": firstName,
         "email": email,
         "password": password
       }))
-    .toPromise().then(d => {
-      // TODO this bullshit is for some reason needed to be able to access the
-      //   keys on data, passed from the api
-      let data: {[k: string]: any} = {};
-      Object.assign(data, d);
-
-      this.api.saveAuthToken(data["access_token"]);
-      return this.me();
-    });
+      .pipe(tap(response => this.api.saveAuthToken(response.access_token)));
   }
 
   login(email:string, password:string) {
@@ -48,7 +43,7 @@ export class AuthService {
     });
   }
 
-  me() {
+  me(): Promise<User> {
     return this.http.get(`${this.api.baseUrl}/profile`)
     .toPromise().then(d => {
       // TODO this bullshit is for some reason needed to be able to access the
@@ -56,7 +51,7 @@ export class AuthService {
       let data: {[k: string]: any} = {};
       Object.assign(data, d);
 
-      this.api.currentUser = new User(data["email"])
+      this.api.currentUser = new User(data["name"], data["email"], data["password"])
       return this.api.currentUser;
     });
   }
@@ -66,3 +61,4 @@ export class AuthService {
     // TODO push to login
   }
 }
+

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  firstName: string = "";
   email: string = "";
   password: string = "";
   hidePassword: boolean = true;
@@ -23,12 +24,11 @@ export class RegisterComponent implements OnInit {
   }
 
   tryRegister() {
-    this.auth.register(this.email, this.password)
-    .then(r => {
-      this.router.navigate(['/']);
-    }).catch(e => {
-      this.error = e;
-    });
+    this.auth.register(this.firstName, this.email, this.password)
+      .subscribe(
+        response => this.router.navigate(['/']),
+        error => this.error = error
+      );
   }
 
   login() {

@@ -1,7 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ClubComponent } from './pages/home/club/club.component';
 
 import { APIHttpInterceptor } from './services/interceptor';
 
@@ -18,16 +20,18 @@ import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    ClubComponent,
     HomeComponent,
+    LoginComponent,
     RegisterComponent,
-    StylePreviewComponent,
+    StylePreviewComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
+    BrowserModule,
+    CommonModule,
     FormsModule,
+    HttpClientModule,
     SharedModule
     // AuthService
   ],

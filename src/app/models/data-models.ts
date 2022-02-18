@@ -22,3 +22,8 @@ export class User implements IUser {
 export interface RegistrationResponse extends IUser {
   access_token: string;
 }
+
+export interface IClub {
+  id: string;
+  name: string;
+}

@@ -15,17 +15,8 @@
     </div>
   </div>
 
-  <div class="clubs">
-    <div class="club">
-      <div class="left">
-        <h2>Alice's Book Club</h2>
-        <p>Current theme: Eponymous</p>
-        <p>Next deadline: discussion on Feb 6th</p>
-      </div>
-      <div class="right">
-        <p>8 members</p>
-        <button class="main-button inline new">View ></button>
-      </div>
-    </div>
-  </div>
+  <ng-container *ngFor="let club of clubs">
+    <app-club [club]="club"></app-club>
+  </ng-container>
+
 </div>

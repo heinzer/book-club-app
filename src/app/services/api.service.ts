@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/data-models';
+import { IUser, LoginResponse, User } from '../models/data-models';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,8 @@ export class ApiService {
   private token:string;
 
   public storageKeys = {
-    TOKEN: "token"
+    TOKEN: "token",
+    CURRENT_USER: "current user"
   };
 
   /*
@@ -35,6 +36,17 @@ export class ApiService {
       this.token = possibleToken;
     }
     return possibleToken;
+  }
+
+  saveSessionInfo(loginResponse: LoginResponse): void {
+    const { access_token, ...user } = loginResponse;
+    this.saveCurrentUser(user);
+    this.saveAuthToken(access_token);
+  }
+
+  saveCurrentUser(currentUser: IUser): void {
+    this.saveStoredItem(this.storageKeys.CURRENT_USER, JSON.stringify(currentUser));
+    this.currentUser = currentUser;
   }
 
   saveAuthToken(authToken:string) {

@@ -13,7 +13,8 @@ export class LoginComponent implements OnInit {
   password: string = "";
   error: any = "";
 
-  constructor(public auth: AuthService, public api: ApiService, private router: Router) { }
+  constructor(public auth: AuthService, public api: ApiService, private router: Router) {
+  }
 
   ngOnInit(): void {
     if (this.api.currentUser) {
@@ -23,11 +24,12 @@ export class LoginComponent implements OnInit {
 
   tryLogin() {
     this.auth.login(this.email, this.password)
-    .then(r => {
-      this.router.navigate(['/']);
-    }).catch(e => {
-      this.error = e;
-    });
+      .subscribe(r => {
+          this.router.navigate(['/']);
+        },
+        e => {
+          this.error = e;
+        });
   }
 
   register() {

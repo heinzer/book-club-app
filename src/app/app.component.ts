@@ -15,11 +15,13 @@ export class AppComponent {
     const possibleToken = this.api.loadToken();
     if (possibleToken) {
       this.auth.me()
-      .then(user => {
-        this.router.navigate(['/']);
-      }).catch(err => {
-        this.router.navigate(['/login']);
-      });
+        .subscribe(
+          user => {
+            this.router.navigate(['/']);
+          },
+          err => {
+            this.router.navigate(['/login']);
+          });
     }
   }
 }

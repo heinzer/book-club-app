@@ -1,5 +1,6 @@
 export interface IUser {
-  name: string;
+  id: string;
+  firstName: string;
   email: string;
   password: string;
   lastName?: string;
@@ -8,18 +9,20 @@ export interface IUser {
 }
 
 export class User implements IUser {
-  name: string = "";
+  id: string = "";
+  firstName: string = "";
   email: string = "";
   password: string = "";
 
-  constructor(name: string, email: string, password: string) {
-    this.name = name;
+  constructor(id: string, name: string, email: string, password: string) {
+    this.id = id;
+    this.firstName = name;
     this.email = email;
     this.password = password;
   }
 }
 
-export interface RegistrationResponse extends IUser {
+export interface LoginResponse extends IUser {
   access_token: string;
 }
 

@@ -1,20 +1,10 @@
-<div class="login-component">
+<div class="login-component full-height">
   <h1>Welcome back to Book Club!</h1>
   <div class="input-pair">
-    <!-- <label>Email</label> -->
     <input type="text" placeholder="Email" [(ngModel)]="email">
   </div>
 
-  <div class="input-pair">
-    <!-- <label>Password</label> -->
-    <input [type]="hidePassword ? 'password' : 'text'" placeholder="Password" [(ngModel)]="password">
-
-    <!-- bug: is the entire width, toggles outside  -->
-    <div class="toggle-password-view" (click)="toggleHide()">
-      <span class="fas fa-eye" *ngIf="!hidePassword"></span>
-      <span class="fas fa-eye-slash" *ngIf="hidePassword"></span>
-    </div>
-  </div>
+  <app-password-input [(password)]="password"></app-password-input>
 
   <button class="main-button login" (click)="tryLogin()">Submit</button>
 

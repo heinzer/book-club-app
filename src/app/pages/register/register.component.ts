@@ -19,10 +19,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  toggleHide() {
-    this.hidePassword = !this.hidePassword;
-  }
-
   tryRegister() {
     this.auth.register(this.firstName, this.email, this.password)
       .subscribe(

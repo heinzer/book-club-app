@@ -13,18 +13,12 @@ export class LoginComponent implements OnInit {
   password: string = "";
   error: any = "";
 
-  hidePassword: boolean = true;
-
   constructor(public auth: AuthService, public api: ApiService, private router: Router) { }
 
   ngOnInit(): void {
     if (this.api.currentUser) {
       this.router.navigate(['/']);
     }
-  }
-
-  toggleHide() {
-    this.hidePassword = !this.hidePassword;
   }
 
   tryLogin() {
@@ -39,5 +33,4 @@ export class LoginComponent implements OnInit {
   register() {
     this.router.navigate(['/register']);
   }
-
 }

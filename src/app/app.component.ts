@@ -16,7 +16,7 @@ export class AppComponent {
     if (possibleToken) {
       this.auth.me()
       .then(user => {
-        // this.router.navigate(['/']);
+        this.router.navigate(['/']);
       }).catch(err => {
         this.router.navigate(['/login']);
       });

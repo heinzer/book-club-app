@@ -11,6 +11,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { StylePreviewComponent } from './pages/style-preview/style-preview.component';
+import { SharedModule } from './shared/shared.module';
 
 // import { AuthService } from './services/auth.service';
 
@@ -26,7 +27,8 @@ import { StylePreviewComponent } from './pages/style-preview/style-preview.compo
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SharedModule
     // AuthService
   ],
   providers: [

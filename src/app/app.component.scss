@@ -1,6 +1,10 @@
+$navbar_height: 22px;
+$navbar_padding: 10px;
+
 .navbar {
   display: flex;
-  padding: 10px 20px;
+  padding: $navbar_padding 20px;
+  height: $navbar_height;
   justify-content: space-between;
   background-color: var(--darkblue);
 }
@@ -22,4 +26,8 @@
 }
 .navbar .nav-item .fas {
   color: white;
+}
+
+.router-outlet-body {
+  height: calc(100% - #{$navbar_height + $navbar_padding + $navbar_padding});
 }

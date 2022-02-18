@@ -4,6 +4,7 @@
   flex-direction: column;
   width: 50%;
   min-width: 300px;
+  justify-content: center;
 }
 
 h1 {
@@ -16,11 +17,4 @@ h1 {
 
 .register {
   margin: 20px auto;
-}
-
-.toggle-password-view {
-  transform: translateY(-35px);
-  padding-right: 30px;
-  color: var(--gray);
-  text-align: right;
 }

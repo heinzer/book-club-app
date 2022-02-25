@@ -30,3 +30,22 @@ export interface IClub {
   id: string;
   name: string;
 }
+
+export interface ITheme {
+  id: string;
+  clubId: string;
+  name: string;
+  description: string;
+  nominatorId: string;
+  status: ThemeStatus;
+  startDate: string;
+  nominationDeadline: string;
+  votingDeadline: string;
+  readingDeadline: string;
+  discussionDeadline: string;
+}
+
+export enum ThemeStatus {
+  OPEN = 'OPEN',
+  CLOSED = 'CLOSED',
+}

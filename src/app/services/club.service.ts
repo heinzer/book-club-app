@@ -1,21 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
-import { IClub, IUser } from '../models/data-models';
+import { IClub, ITheme, IUser } from '../models/data-models';
 import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClubService {
-
+  private readonly clubBaseUrl = `${this.api.baseUrl}/clubs`;
+  private readonly clubUrl = (clubId: string) => `${this.clubBaseUrl}/${clubId}`;
   constructor(public http: HttpClient, private api: ApiService) {}
 
   getClubs(): Observable<IClub[]>{
-    return this.http.get<IClub[]>(`${this.api.baseUrl}/clubs`);
+    return this.http.get<IClub[]>(`${this.clubBaseUrl}`);
   }
 
   getMembershipsForClub(clubId: string): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${this.api.baseUrl}/clubs/${clubId}/memberships`);
+    return this.http.get<IUser[]>(`${this.clubUrl(clubId)}/memberships`);
+  }
+
+  getCurrentTheme(clubId: string): Observable<ITheme> {
+    return this.http.get<ITheme>(`${this.clubUrl(clubId)}/current-theme`);
   }
 }

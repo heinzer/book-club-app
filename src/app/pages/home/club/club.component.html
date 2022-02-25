@@ -2,8 +2,8 @@
   <div class="club">
     <div class="left">
       <h2>{{club.name}}</h2>
-      <p>Current theme: Eponymous</p>
-      <p>Next deadline: discussion on Feb 6th</p>
+      <p *ngIf="currentTheme">Current theme: {{currentTheme.name}}</p>
+      <p *ngIf="currentTheme">Next deadline: {{getNextDeadlineForClub()}}</p>
     </div>
     <div class="right">
       <p>{{memberships?.length}} members</p>

@@ -1,0 +1,16 @@
+.deadline {
+
+  .timeline {
+    height: 20px;
+    background: gray;
+    border-radius: 20px;
+    border: 1px solid var(--salmon);
+    background: var(--white);
+
+    .progress {
+      background: var(--salmon);
+      border-radius: 20px;
+      height: 20px;
+    }
+  }
+}

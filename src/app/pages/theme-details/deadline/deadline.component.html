@@ -1,0 +1,6 @@
+<div class="deadline">
+    <p>{{ date | deadline : stage }}</p>
+    <div class="timeline">
+      <div class="progress" [style.width]="percentage + '%'"></div>
+    </div>
+</div>

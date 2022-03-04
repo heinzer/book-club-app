@@ -1,0 +1,57 @@
+.club-component {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  .row {
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    margin: 0px 40px;
+
+    .input-pair {
+      margin-bottom: 0px;
+    }
+  }
+
+  .club-content {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin: 0px 40px;
+
+    .left {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+
+      h3 {
+        margin: 40px 20px 20px;
+      }
+
+      .new {
+        margin-left: 10px;
+        color: var(--green);
+        transition: 0.2 all;
+        opacity: 0.4;
+
+        :hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    .right {
+      // flex-direction: column;
+      .members-list {
+        padding: 20px;
+        border: 1px solid lightgray;
+        margin: 40px 20px 0px 0px;
+
+        h3 {
+          margin: 0px 0px 20px;
+        }
+      }
+    }
+  }
+}

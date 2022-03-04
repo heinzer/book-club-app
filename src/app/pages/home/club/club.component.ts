@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { IClub, ITheme, IUser } from '../../../models/data-models';
 import { ClubService } from '../../../services/club.service';
 import { ThemeService } from '../../../services/theme.service';
@@ -27,7 +28,7 @@ export class ClubComponent {
   memberships: IUser[];
   currentTheme: ITheme;
 
-  constructor(private clubService: ClubService, private themeService: ThemeService) {}
+  constructor(private clubService: ClubService, private themeService: ThemeService, private router: Router) {}
 
   getNextDeadlineForClub(): string | undefined {
     let now = new Date();
@@ -44,5 +45,9 @@ export class ClubComponent {
       return `discussion on ${dayjs(this.currentTheme.discussionDeadline).format('MMMM Do')}`;
     }
     return ''; // we shouldn't get here
+  }
+
+  viewClubPage(id: string) {
+    this.router.navigate([`/club/${id}`]);
   }
 }

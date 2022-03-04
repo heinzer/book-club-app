@@ -3,21 +3,31 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from '../app.component';
 import { PasswordInputComponent } from './password-input/password-input.component';
+import { FancyDeadlinePipe, DeadlinePipe, DeadlinePercentagePipe } from './deadlines.pipe';
+import * as dayjs from 'dayjs';
 
 export const components = [
-  PasswordInputComponent
+  PasswordInputComponent,
+];
+
+export const pipes = [
+  FancyDeadlinePipe,
+  DeadlinePipe,
+  DeadlinePercentagePipe
 ];
 
 @NgModule({
   declarations: [
-    ...components
+    ...components,
+    ...pipes
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
   exports: [
-    ...components
+    ...components,
+    ...pipes
   ],
   providers: [],
   bootstrap: [AppComponent]

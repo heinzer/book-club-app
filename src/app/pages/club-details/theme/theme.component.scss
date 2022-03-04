@@ -1,20 +1,17 @@
-.club {
-  border: 1px solid var(--lightgray);
-  border-radius: 6px;
+.theme {
   display: flex;
   justify-content: space-between;
   margin: 0px 20px 20px;
-  padding: 20px;
-  transition: .1s ease-out all;
-
-  &:hover {
-    cursor: pointer;
-    border: 1px solid var(--darkblue);
-  }
 
   h2 {
     margin: 0px;
+
+    &:hover {
+      color: var(--darkblue);
+      cursor: pointer;
+    }
   }
+
   p {
     margin: 0px;
   }

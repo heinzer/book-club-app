@@ -1,0 +1,40 @@
+<div class="club-component">
+  <div class="row">
+    <div class="left">
+      <h3 *ngIf="club">{{club.name}}</h3>
+      <!-- <button class="main-button inline new">+ new</button> -->
+    </div>
+
+    <div class="input-pair">
+      <label for="sort">Sort by</label>
+      <select name="sort" id="sort">
+        <option value="join">Join date</option>
+        <option value="alpha">Alphabetical</option>
+        <option value="deadline">Upcoming Deadline</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="club-content">
+    <div class="left">
+      <h3>Open Themes</h3>
+      <ng-container *ngFor="let theme of openThemes">
+        <app-theme [theme]="theme"></app-theme>
+      </ng-container>
+
+      <h3>Closed Themes</h3>
+      <ng-container *ngFor="let theme of closedThemes">
+        <app-theme [theme]="theme"></app-theme>
+      </ng-container>
+    </div>
+
+    <div class="right">
+      <div class="members-list" *ngIf="members && members.length > 0">
+        <h3>Members</h3>
+        <ng-container *ngFor="let member of members">
+          <h4>{{ member.firstName }} {{ member.lastName ? member.lastName[0] : '' }}</h4>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

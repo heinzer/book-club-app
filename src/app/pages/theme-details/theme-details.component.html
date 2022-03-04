@@ -1,0 +1,15 @@
+<div class="theme-details-component">
+  <ng-container *ngIf="theme">
+    <div class="row">
+      <h3>{{ theme.name }}</h3>
+      <p *ngIf="theme.description">{{ theme.description }}</p>
+
+      <div class="deadlines">
+        <app-deadline [date]="theme.nominationDeadline" [percentage]="theme.startDate | deadlinePercentage : theme.nominationDeadline" stage="Nominate"></app-deadline>
+        <app-deadline [date]="theme.votingDeadline" [percentage]="theme.nominationDeadline | deadlinePercentage : theme.votingDeadline" stage="Vote"></app-deadline>
+        <app-deadline [date]="theme.readingDeadline" [percentage]="theme.votingDeadline | deadlinePercentage : theme.readingDeadline" stage="Read"></app-deadline>
+      </div>
+    </div>
+  </ng-container>
+
+</div>

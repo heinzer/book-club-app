@@ -12,4 +12,8 @@ export class ThemeService {
   getThemes(clubId: string): Observable<ITheme[]> {
     return this.http.get<ITheme[]>(`${this.api.baseUrl}/themes/${clubId}`);
   }
+
+  getTheme(themeId: string): Observable<ITheme> {
+    return this.http.get<ITheme>(`${this.api.baseUrl}/themes/${themeId}`);
+  }
 }

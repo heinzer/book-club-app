@@ -16,6 +16,14 @@ export class ClubService {
     return this.http.get<IClub[]>(`${this.clubBaseUrl}`);
   }
 
+  getClub(clubId: string): Observable<IClub>{
+    return this.http.get<IClub>(`${this.clubUrl(clubId)}`);
+  }
+
+  getClubThemes(clubId: string): Observable<ITheme[]>{
+    return this.http.get<ITheme[]>(`${this.clubUrl(clubId)}/themes`);
+  }
+
   getMembershipsForClub(clubId: string): Observable<IUser[]> {
     return this.http.get<IUser[]>(`${this.clubUrl(clubId)}/memberships`);
   }

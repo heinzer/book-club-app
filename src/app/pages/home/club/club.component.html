@@ -1,5 +1,5 @@
 <div class="clubs">
-  <div class="club">
+  <div class="club" (click)="viewClubPage(club.id)">
     <div class="left">
       <h2>{{club.name}}</h2>
       <p *ngIf="currentTheme">Current theme: {{currentTheme.name}}</p>

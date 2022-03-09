@@ -3,9 +3,11 @@
     display: flex;
     padding: 20px;
     justify-content: space-between;
+    flex-direction: row;
 
     .left {
       display: flex;
+      width: auto;
       align-items: flex-end;
 
       h3 {
@@ -25,6 +27,7 @@
     }
     .input-pair {
       margin-bottom: 0px;
+      width: fit-content;
     }
   }
 }

@@ -24,12 +24,12 @@ export class LoginComponent implements OnInit {
 
   tryLogin() {
     this.auth.login(this.email, this.password)
-      .subscribe(r => {
-          this.router.navigate(['/']);
-        },
-        e => {
-          this.error = e;
-        });
+    .subscribe(r => {
+        this.router.navigate(['/']);
+      },
+      e => {
+        this.error = e;
+      });
   }
 
   register() {

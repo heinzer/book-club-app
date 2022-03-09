@@ -5,11 +5,19 @@
 
   .row {
     display: flex;
-    padding: 20px;
+    padding: 10px;
     justify-content: space-between;
+    flex-direction: row;
     margin: 0px 40px;
 
+    .left {
+      display: flex;
+      width: auto;
+      align-items: flex-end;
+    }
+
     .input-pair {
+      width: fit-content;
       margin-bottom: 0px;
     }
   }

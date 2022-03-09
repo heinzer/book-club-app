@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClubComponent } from './pages/home/club/club.component';
 import { ThemeComponent } from './pages/club-details/theme/theme.component';
 import { ThemeDetailsComponent } from './pages/theme-details/theme-details.component';
@@ -40,7 +40,8 @@ import { SharedModule } from './shared/shared.module';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
     // AuthService
   ],
   providers: [

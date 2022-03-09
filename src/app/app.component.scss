@@ -1,4 +1,4 @@
-$navbar_height: 22px;
+$navbar_height: 40px;
 $navbar_padding: 10px;
 
 .navbar {
@@ -6,7 +6,11 @@ $navbar_padding: 10px;
   padding: $navbar_padding 20px;
   height: $navbar_height;
   justify-content: space-between;
-  background-color: var(--darkblue);
+  background: var(--olive) !important;
+}
+
+.navbar .left {
+  display: flex;
 }
 
 .navbar .left a {

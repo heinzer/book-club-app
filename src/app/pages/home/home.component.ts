@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import { IClub } from '../../models/data-models';
 import { AuthService } from '../../services/auth.service';
@@ -14,11 +15,18 @@ import { UserService } from '../../services/user.service';
 })
 export class HomeComponent implements OnInit {
   clubs: IClub[] = [];
+  newClubForm: FormGroup;
 
   constructor(public auth: AuthService,
               private api: ApiService,
               private router: Router,
-              private userService: UserService) {}
+              private userService: UserService,
+              private clubService: ClubService,
+              private form: FormBuilder) {
+    this.newClubForm = form.group({
+      name: ["", Validators.required],
+    });
+  }
 
   ngOnInit(): void {
     // check that the user is authenticated
@@ -26,8 +34,13 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['/login']);
     } else {
       this.userService.getMembershipsForCurrentUser().subscribe(clubs => this.clubs = clubs);
-
     }
+  }
+
+  createClub(): void {
+    this.clubService.createClub(this.newClubForm.value.name).subscribe(club => {
+      this.userService.getMembershipsForCurrentUser().subscribe(clubs => this.clubs = clubs);
+    })
   }
 
 }

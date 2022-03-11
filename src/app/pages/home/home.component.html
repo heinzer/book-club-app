@@ -2,7 +2,7 @@
   <div class="row">
     <div class="left">
       <h3>My Clubs</h3>
-      <button class="main-button inline new">+ new</button>
+      <button class="main-button inline new" data-bs-toggle="modal" data-bs-target="#new-theme">+ new</button>
     </div>
 
     <div class="input-pair">
@@ -19,4 +19,26 @@
     <app-club [club]="club"></app-club>
   </ng-container>
 
+</div>
+
+<div class="modal fade new-theme-modal" id="new-theme" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create a theme</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="newClubForm" (ngSubmit)="createClub()">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Name</label>
+            <input type="text" class="form-control" id="theme-name" formControlName="name">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="newClubForm.invalid">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

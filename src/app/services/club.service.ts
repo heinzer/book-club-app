@@ -31,4 +31,8 @@ export class ClubService {
   getCurrentTheme(clubId: string): Observable<ITheme> {
     return this.http.get<ITheme>(`${this.clubUrl(clubId)}/current-theme`);
   }
+
+  createClub(clubName: string): Observable<IClub> {
+    return this.http.post<IClub>(this.clubBaseUrl, { adminId: this.api.currentUser?.id, name: clubName });
+  }
 }

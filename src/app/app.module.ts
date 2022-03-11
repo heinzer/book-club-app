@@ -18,6 +18,7 @@ import { ClubDetailsComponent } from './pages/club-details/club-details.componen
 import { RegisterComponent } from './pages/register/register.component';
 import { StylePreviewComponent } from './pages/style-preview/style-preview.component';
 import { SharedModule } from './shared/shared.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // import { AuthService } from './services/auth.service';
 
@@ -41,7 +42,8 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     HttpClientModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
     // AuthService
   ],
   providers: [

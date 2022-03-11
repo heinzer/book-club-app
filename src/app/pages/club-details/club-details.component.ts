@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { tap } from 'rxjs/operators';
-import { IClub, ITheme, IUser } from '../../models/data-models';
-import { AuthService } from '../../services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IClub, ITheme, IUser, ThemeStatus } from '../../models/data-models';
 import { ApiService } from '../../services/api.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { ClubService } from '../../services/club.service';
 import { ThemeService } from '../../services/theme.service';
 import { UserService } from '../../services/user.service';
@@ -16,26 +15,25 @@ import { UserService } from '../../services/user.service';
 })
 export class ClubDetailsComponent implements OnInit {
   id: string;
-  club: IClub | null = null;
-  members: IUser[] | null = null;
-  themes: ITheme[] | null = null;
-  openThemes: ITheme[] | null = null;
-  closedThemes: ITheme[] | null = null;
+  club: IClub;
+  members: IUser[];
+  themes: ITheme[];
+  openThemes: ITheme[];
+  closedThemes: ITheme[];
   newThemeForm: FormGroup;
 
-  constructor(public auth: AuthService,
-              private api: ApiService,
+  constructor(private api: ApiService,
               private clubService: ClubService, private themeService: ThemeService,
               private router: Router, private route: ActivatedRoute,
               private userService: UserService, form: FormBuilder) {
-                this.newThemeForm = form.group({
-                  name: ["", Validators.required],
-                  description:["", Validators.required],
-                  nominationDeadline: ["", Validators.required],
-                  votingDeadline: ["", Validators.required],
-                  discussionDeadline: ["", Validators.required]
-                });
-              }
+    this.newThemeForm = form.group({
+      name: ["", Validators.required],
+      description: ["", Validators.required],
+      nominationDeadline: ["", Validators.required],
+      votingDeadline: ["", Validators.required],
+      discussionDeadline: ["", Validators.required]
+    });
+  }
 
   ngOnInit(): void {
     // check that the user is authenticated
@@ -54,31 +52,29 @@ export class ClubDetailsComponent implements OnInit {
   fetchThemes() {
     this.clubService.getClubThemes(this.id).subscribe(themes => {
       this.themes = themes;
-      this.openThemes = themes.filter(t => t.status === "OPEN");
-      this.closedThemes = themes.filter(t => t.status === "CLOSED");
+      this.openThemes = themes.filter(t => t.status === ThemeStatus.OPEN);
+      this.closedThemes = themes.filter(t => t.status === ThemeStatus.CLOSED);
     });
   }
 
   createTheme() {
     console.log(this.newThemeForm)
-    let formFields = {
+    let formFields: ITheme = {
       clubId: this.club?.id,
       nominatorId: this.api.currentUser?.id,
       name: this.newThemeForm.value.name,
       description: this.newThemeForm.value.description,
-      status: 'OPEN',
-      startDate: new Date(),
-      nominationDeadline: new Date(this.newThemeForm.value.nominationDeadline),
-      votingDeadline: new Date(this.newThemeForm.value.votingDeadline),
-      readingDeadline: new Date(this.newThemeForm.value.discussionDeadline),
-      discussionDeadline: new Date(this.newThemeForm.value.discussionDeadline),
+      status: ThemeStatus.OPEN,
+      startDate: new Date().toString(),
+      nominationDeadline: new Date(this.newThemeForm.value.nominationDeadline).toString(),
+      votingDeadline: new Date(this.newThemeForm.value.votingDeadline).toString(),
+      readingDeadline: new Date(this.newThemeForm.value.discussionDeadline).toString(),
+      discussionDeadline: new Date(this.newThemeForm.value.discussionDeadline).toString(),
     }
     this.themeService.createTheme(formFields).subscribe(theme => {
       this.fetchThemes();
-      // todo close the modal
-      console.log('theme:',theme)
     }, err => {
-      console.log('err:',err)
+      console.log('err:', err)
     });
   }
 

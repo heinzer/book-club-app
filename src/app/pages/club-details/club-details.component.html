@@ -52,23 +52,23 @@
       <form [formGroup]="newThemeForm" (ngSubmit)="createTheme()">
         <div class="modal-body">
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Name</label>
+            <label for="theme-name" class="col-form-label">Name</label>
             <input type="text" class="form-control" id="theme-name" formControlName="name">
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Description</label>
+            <label for="theme-description" class="col-form-label">Description</label>
             <textarea class="form-control" id="theme-description" formControlName="description"></textarea>
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Nomination Deadline</label>
+            <label for="nomination-deadline" class="col-form-label">Nomination Deadline</label>
             <input type="date" class="form-control" id="nomination-deadline" formControlName="nominationDeadline">
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Voting Deadline</label>
+            <label for="voting-deadline" class="col-form-label">Voting Deadline</label>
             <input type="date" class="form-control" id="voting-deadline" formControlName="votingDeadline">
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Discussion Deadline</label>
+            <label for="discussion-deadline" class="col-form-label">Discussion Deadline</label>
             <input type="datetime-local" class="form-control" id="discussion-deadline" formControlName="discussionDeadline">
           </div>
         </div>
@@ -79,12 +79,3 @@
     </div>
   </div>
 </div>
-
-<!-- description: string;
-nominatorId: string;
-status: ThemeStatus;
-startDate: string;
-nominationDeadline: string;
-votingDeadline: string;
-readingDeadline: string;
-discussionDeadline: string; -->

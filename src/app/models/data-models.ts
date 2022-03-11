@@ -32,7 +32,7 @@ export interface IClub {
 }
 
 export interface ITheme {
-  id: string;
+  id?: string;
   clubId: string;
   name: string;
   description: string;

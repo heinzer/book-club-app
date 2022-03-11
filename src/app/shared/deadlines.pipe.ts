@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ITheme } from '../models/data-models';
 import * as dayjs from 'dayjs';
 import * as advancedFormat from 'dayjs/plugin/advancedFormat';
+import { ITheme, ThemeStatus } from '../models/data-models';
+
 dayjs.extend(advancedFormat)
 
 @Pipe({name: 'fancyDeadline'})
@@ -9,7 +10,7 @@ export class FancyDeadlinePipe implements PipeTransform {
   transform(theme: ITheme): string {
     let now = new Date();
 
-    if (theme.status === "CLOSED") {
+    if (theme.status === ThemeStatus.CLOSED) {
       return `Discussion took place on ${dayjs(theme.discussionDeadline).format('MMMM Do')}`;
     }
 

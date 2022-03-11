@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { IClub, ITheme, IUser } from '../../../models/data-models';
-import { ClubService } from '../../../services/club.service';
-import { ThemeService } from '../../../services/theme.service';
 import * as dayjs from 'dayjs';
 import * as advancedFormat from 'dayjs/plugin/advancedFormat';
+import { ITheme, ThemeStatus } from '../../../models/data-models';
+import { ClubService } from '../../../services/club.service';
+import { ThemeService } from '../../../services/theme.service';
+
 dayjs.extend(advancedFormat)
 
 @Component({
@@ -17,8 +18,6 @@ export class ThemeComponent {
   @Input()
   set theme(theme: ITheme) {
     this._theme = theme;
-    // this.clubService.getMembershipsForClub(this._club.id).subscribe(memberships => this.memberships = memberships);
-    // this.clubService.getCurrentTheme(this._club.id).subscribe(currentTheme => this.currentTheme = currentTheme);
   }
 
   get theme(): ITheme {
@@ -31,7 +30,7 @@ export class ThemeComponent {
   getNextDeadlineForTheme(): string | undefined {
     let now = new Date();
 
-    if (this.theme.status === "CLOSED") {
+    if (this.theme.status === ThemeStatus.CLOSED) {
       return `Discussion took place on ${dayjs(this.theme.discussionDeadline).format('MMMM Do')}`;
     }
 

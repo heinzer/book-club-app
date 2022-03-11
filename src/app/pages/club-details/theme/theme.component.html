@@ -2,7 +2,7 @@
   <div class="theme">
     <div class="left">
       <h2 (click)="viewTheme(theme.id)">{{theme.name}}</h2>
-      <p>{{getNextDeadlineForTheme()}}</p>
+      <p>{{theme | fancyDeadline}}</p>
     </div>
   </div>
 </div>

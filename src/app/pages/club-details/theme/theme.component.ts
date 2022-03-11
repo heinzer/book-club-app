@@ -26,28 +26,6 @@ export class ThemeComponent {
 
   constructor(private clubService: ClubService, private themeService: ThemeService, private router: Router) {}
 
-  // can probably outsource somewhere, also occurs in club component
-  getNextDeadlineForTheme(): string | undefined {
-    let now = new Date();
-
-    if (this.theme.status === ThemeStatus.CLOSED) {
-      return `Discussion took place on ${dayjs(this.theme.discussionDeadline).format('MMMM Do')}`;
-    }
-
-    if (new Date(this.theme.nominationDeadline) > now) {
-      return `Nominations open until ${dayjs(this.theme.nominationDeadline).format('MMMM Do')}`;
-    }
-
-    if (new Date(this.theme.votingDeadline) > now) {
-      return `Voting open until ${dayjs(this.theme.votingDeadline).format('MMMM Do')}`;
-    }
-
-    if (new Date(this.theme.discussionDeadline) > now) {
-      return `Discussion on ${dayjs(this.theme.discussionDeadline).format('MMMM Do')}`;
-    }
-    return ''; // we shouldn't get here
-  }
-
   viewTheme(id: string) {
     this.router.navigate([`/theme/${id}`]);
   }

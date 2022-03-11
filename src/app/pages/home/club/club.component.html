@@ -3,7 +3,7 @@
     <div class="left">
       <h2>{{club.name}}</h2>
       <p *ngIf="currentTheme">Current theme: {{currentTheme.name}}</p>
-      <p *ngIf="currentTheme">Next deadline: {{getNextDeadlineForClub()}}</p>
+      <p *ngIf="currentTheme">Next deadline: {{currentTheme | fancyDeadline}}</p>
     </div>
     <div class="right">
       <p>{{memberships?.length}} members</p>

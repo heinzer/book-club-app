@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
-import { IClub, ITheme, IUser } from '../models/data-models';
+import {IClub, ITheme, IUser, IUserMembership} from '../models/data-models';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -24,8 +24,8 @@ export class ClubService {
     return this.http.get<ITheme[]>(`${this.clubUrl(clubId)}/themes`);
   }
 
-  getMembershipsForClub(clubId: string): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${this.clubUrl(clubId)}/memberships`);
+  getMembershipsForClub(clubId: string): Observable<IUserMembership[]> {
+    return this.http.get<IUserMembership[]>(`${this.clubUrl(clubId)}/memberships`);
   }
 
   getCurrentTheme(clubId: string): Observable<ITheme> {

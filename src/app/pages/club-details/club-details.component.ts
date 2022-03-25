@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IClub, ITheme, IUser, ThemeStatus } from '../../models/data-models';
+import {IClub, ITheme, IUser, IUserMembership, ThemeStatus} from '../../models/data-models';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { ClubService } from '../../services/club.service';
@@ -16,7 +16,7 @@ import { UserService } from '../../services/user.service';
 export class ClubDetailsComponent implements OnInit {
   id: string;
   club: IClub;
-  members: IUser[];
+  members: IUserMembership[];
   themes: ITheme[];
   openThemes: ITheme[];
   closedThemes: ITheme[];

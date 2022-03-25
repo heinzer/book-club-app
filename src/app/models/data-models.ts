@@ -8,6 +8,10 @@ export interface IUser {
   state?: string;
 }
 
+export interface IUserMembership extends IUser {
+  isAdmin: boolean;
+}
+
 export interface LoginResponse {
   access_token: string;
 }

@@ -35,7 +35,7 @@
       <div class="members-list" *ngIf="members && members.length > 0">
         <h3>Members</h3>
         <ng-container *ngFor="let member of members">
-          <h4>{{ member.firstName }} {{ member.lastName ? member.lastName[0] : '' }}</h4>
+          <h4>{{ member.firstName }} {{ member.lastName ? member.lastName[0] : '' }} {{ member.isAdmin ? '(admin)' : '' }}</h4>
         </ng-container>
       </div>
     </div>

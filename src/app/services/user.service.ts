@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {IClub, IClubMembership} from '../models/data-models';
+import { IClubMembership } from '../models/data-models';
 import { ApiService } from './api.service';
 
 @Injectable({

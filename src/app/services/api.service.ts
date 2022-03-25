@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
-import { IUser, LoginResponse, User } from '../models/data-models';
+import {IClubMembership, IUser} from '../models/data-models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   public baseUrl = "https://book-club-app-server.herokuapp.com";
-  public currentUser?: User;
+  public currentUser?: IUser;
+  public currentUserMemberships: IClubMembership[] = [];
   private storage;
   private token:string;
 
   public storageKeys = {
     TOKEN: "token",
-    CURRENT_USER: "current user"
+    CURRENT_USER: "current user",
+    CURRENT_USER_MEMBERSHIPS: "current user memberships"
   };
 
   /*
@@ -38,15 +40,14 @@ export class ApiService {
     return possibleToken;
   }
 
-  saveSessionInfo(loginResponse: LoginResponse): void {
-    const { access_token, ...user } = loginResponse;
-    this.saveCurrentUser(user);
-    this.saveAuthToken(access_token);
-  }
-
   saveCurrentUser(currentUser: IUser): void {
     this.saveStoredItem(this.storageKeys.CURRENT_USER, JSON.stringify(currentUser));
     this.currentUser = currentUser;
+  }
+
+  saveCurrentUserMemberships(currentUserMemberships: IClubMembership[]): void {
+    this.saveStoredItem(this.storageKeys.CURRENT_USER_MEMBERSHIPS, JSON.stringify(currentUserMemberships));
+    this.currentUserMemberships = currentUserMemberships
   }
 
   saveAuthToken(authToken:string) {

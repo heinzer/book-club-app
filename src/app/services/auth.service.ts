@@ -2,17 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, mergeMap, tap } from 'rxjs/operators';
-import { IUser, LoginResponse, User } from '../models/data-models';
+import {IClubMembership, IUser, LoginResponse} from '../models/data-models';
 import { ApiService } from './api.service';
+import {UserService} from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(public http: HttpClient, private api: ApiService) {
+  constructor(public http: HttpClient, private api: ApiService, private userService: UserService) {
     if (this.api.authToken()) {
-      this.me();
+      this.getCurrentUser();
     }
   }
 
@@ -22,30 +23,26 @@ export class AuthService {
         "firstName": firstName,
         "email": email,
         "password": password
-      }))
-      .pipe(tap(response => this.api.saveSessionInfo(response)));
+      })).pipe(tap(response => this.api.saveAuthToken(response.access_token)));
   }
 
-  login(email:string, password:string): Observable<User> {
+  login(email:string, password:string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.api.baseUrl}/login`,
       JSON.stringify({
         "email": email,
         "password": password
       }))
-    .pipe(
-      tap(response => this.api.saveAuthToken(response.access_token)),
-      mergeMap(() => this.me())
-    );
+    .pipe(tap(response => this.api.saveAuthToken(response.access_token)));
   }
 
-  me(): Observable<User> {
+  getCurrentUser(): Observable<IUser> {
     return this.http.get<IUser>(`${this.api.baseUrl}/profile`)
-    .pipe(map(user => {
-      const u = new User(user.id, user.firstName, user.email, user.password)
-      this.api.saveCurrentUser(u);
-      console.log('current user is: ', this.api.currentUser);
-      return u;
-    }));
+    .pipe(tap(user => this.api.saveCurrentUser(user)));
+  }
+
+  getCurrentUserMemberships(): Observable<IClubMembership[]> {
+    return this.userService.getMembershipsForCurrentUser()
+      .pipe(tap(clubMemberships => this.api.saveCurrentUserMemberships(clubMemberships)))
   }
 
   logout() {

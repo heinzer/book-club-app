@@ -8,27 +8,17 @@ export interface IUser {
   state?: string;
 }
 
-export class User implements IUser {
-  id: string = "";
-  firstName: string = "";
-  email: string = "";
-  password: string = "";
-
-  constructor(id: string, name: string, email: string, password: string) {
-    this.id = id;
-    this.firstName = name;
-    this.email = email;
-    this.password = password;
-  }
-}
-
-export interface LoginResponse extends IUser {
+export interface LoginResponse {
   access_token: string;
 }
 
 export interface IClub {
   id: string;
   name: string;
+}
+
+export interface IClubMembership extends IClub {
+  isAdmin: boolean;
 }
 
 export interface ITheme {

@@ -19,7 +19,7 @@
     <div class="left">
       <h3>
         Open Themes
-        <button class="main-button inline new" data-bs-toggle="modal" data-bs-target="#new-theme">+ new</button>
+        <button class="main-button inline new" data-bs-toggle="modal" data-bs-target="#new-theme" *ngIf="isCurrentUserAdminOfClub()">+ new</button>
       </h3>
       <ng-container *ngFor="let theme of openThemes">
         <app-theme [theme]="theme"></app-theme>

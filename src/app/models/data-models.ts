@@ -1,5 +1,5 @@
 export interface IUser {
-  id: string;
+  id: number;
   firstName: string;
   email: string;
   password: string;
@@ -17,7 +17,7 @@ export interface LoginResponse {
 }
 
 export interface IClub {
-  id: string;
+  id: number;
   name: string;
 }
 
@@ -26,11 +26,11 @@ export interface IClubMembership extends IClub {
 }
 
 export interface ITheme {
-  id?: string;
-  clubId: string;
+  id?: number;
+  clubId: number;
   name: string;
   description: string;
-  nominatorId: string;
+  nominatorId: number;
   status: ThemeStatus;
   startDate: string;
   nominationDeadline: string;

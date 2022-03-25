@@ -42,19 +42,23 @@ export class ClubDetailsComponent implements OnInit {
     } else {
       this.route.params.subscribe(params => {
         this.id = params['id']
-        this.clubService.getClub(this.id).subscribe(club => this.club = club);
-        this.clubService.getMembershipsForClub(this.id).subscribe(members => this.members = members);
+        this.clubService.getClub(+this.id).subscribe(club => this.club = club);
+        this.clubService.getMembershipsForClub(+this.id).subscribe(members => this.members = members);
         this.fetchThemes();
       })
     }
   }
 
   fetchThemes() {
-    this.clubService.getClubThemes(this.id).subscribe(themes => {
+    this.clubService.getClubThemes(+this.id).subscribe(themes => {
       this.themes = themes;
       this.openThemes = themes.filter(t => t.status === ThemeStatus.OPEN);
       this.closedThemes = themes.filter(t => t.status === ThemeStatus.CLOSED);
     });
+  }
+
+  isCurrentUserAdminOfClub(): boolean {
+    return this.api.currentUserMemberships.find(clubMembership => clubMembership.id === +this.id)?.isAdmin;
   }
 
   createTheme() {

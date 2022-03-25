@@ -26,7 +26,7 @@ export class ThemeComponent {
 
   constructor(private clubService: ClubService, private themeService: ThemeService, private router: Router) {}
 
-  viewTheme(id: string) {
+  viewTheme(id: number) {
     this.router.navigate([`/theme/${id}`]);
   }
 }

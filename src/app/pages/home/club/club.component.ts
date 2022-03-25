@@ -30,7 +30,7 @@ export class ClubComponent {
 
   constructor(private clubService: ClubService, private themeService: ThemeService, private router: Router) {}
 
-  viewClubPage(id: string) {
+  viewClubPage(id: number) {
     this.router.navigate([`/club/${id}`]);
   }
 }

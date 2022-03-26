@@ -9,11 +9,11 @@ import { ClubService } from '../../services/club.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-clubs-list',
+  templateUrl: './clubs-list.component.html',
+  styleUrls: ['./clubs-list.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class ClubsListComponent implements OnInit {
   clubs: IClub[] = [];
   newClubForm: FormGroup;
 

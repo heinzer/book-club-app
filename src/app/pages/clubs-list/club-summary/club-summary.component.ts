@@ -8,11 +8,11 @@ import * as advancedFormat from 'dayjs/plugin/advancedFormat';
 dayjs.extend(advancedFormat)
 
 @Component({
-  selector: 'app-club',
-  templateUrl: './club.component.html',
-  styleUrls: ['./club.component.scss']
+  selector: 'app-club-summary',
+  templateUrl: './club-summary.component.html',
+  styleUrls: ['./club-summary.component.scss']
 })
-export class ClubComponent {
+export class ClubSummaryComponent {
   private _club: IClub;
   @Input()
   set club(club: IClub) {

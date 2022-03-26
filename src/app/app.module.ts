@@ -20,9 +20,8 @@ import { StylePreviewComponent } from './pages/style-preview/style-preview.compo
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ProfileComponent} from './pages/profile/profile.component';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-
-// import { AuthService } from './services/auth.service';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import {faPlusCircle, faUsers} from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -59,4 +58,9 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    // Add an icon to the library for convenient access in other components
+    library.addIcons(faPlusCircle, faUsers);
+  }
+}

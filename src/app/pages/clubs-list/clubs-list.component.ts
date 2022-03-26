@@ -6,7 +6,6 @@ import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { ClubService } from '../../services/club.service';
 import { UserService } from '../../services/user.service';
-import {faCoffee, faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-clubs-list',
@@ -16,7 +15,6 @@ import {faCoffee, faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 export class ClubsListComponent implements OnInit {
   clubs: IClub[] = [];
   newClubForm: FormGroup;
-  faPlusCircle = faPlusCircle;
 
   constructor(public auth: AuthService,
               private api: ApiService,

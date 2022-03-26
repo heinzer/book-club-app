@@ -5,9 +5,8 @@
       <p *ngIf="currentTheme">Current theme: {{currentTheme.name}}</p>
       <p *ngIf="currentTheme">Next deadline: {{currentTheme | fancyDeadline}}</p>
     </div>
-    <div class="right">
-      <p>{{memberships?.length}} members</p>
-      <button class="main-button inline new">View ></button>
+    <div class="members">
+      <p>{{memberships?.length}}</p><fa-icon icon="users"></fa-icon>
     </div>
   </div>
 </div>

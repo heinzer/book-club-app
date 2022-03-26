@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from './services/api.service';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
-import {mergeMap, tap} from 'rxjs/operators';
+import {mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',

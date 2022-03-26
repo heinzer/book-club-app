@@ -19,6 +19,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { StylePreviewComponent } from './pages/style-preview/style-preview.component';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {ProfileComponent} from './pages/profile/profile.component';
 
 // import { AuthService } from './services/auth.service';
 
@@ -26,14 +27,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     AppComponent,
     ClubSummaryComponent,
-    ThemeSummaryComponent,
     ClubsListComponent,
     ClubComponent,
-    ThemeComponent,
     DeadlineComponent,
     LoginComponent,
+    ProfileComponent,
     RegisterComponent,
-    StylePreviewComponent
+    StylePreviewComponent,
+    ThemeComponent,
+    ThemeSummaryComponent
   ],
   imports: [
     AppRoutingModule,

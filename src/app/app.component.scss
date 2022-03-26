@@ -35,3 +35,7 @@ $navbar_padding: 10px;
 .router-outlet-body {
   height: calc(100% - #{$navbar_height + $navbar_padding + $navbar_padding});
 }
+
+.fa-user-circle {
+  font-size: 25px;
+}

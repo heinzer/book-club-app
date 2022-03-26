@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.api.currentUser) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/clubs']);
     }
   }
 
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
         mergeMap(() => this.auth.getCurrentUserMemberships())
       )
       .subscribe(r => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/clubs']);
         },
         e => {
           this.error = e;

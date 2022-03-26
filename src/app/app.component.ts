@@ -23,7 +23,7 @@ export class AppComponent {
         .subscribe(
           user => {
             console.log('navigating to clubs for some reason')
-            this.router.navigate(['/']);
+            this.router.navigate(['/clubs']);
           },
           err => {
             this.router.navigate(['/login']);

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { tap } from 'rxjs/operators';
 import { ITheme } from '../../models/data-models';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
@@ -8,11 +7,11 @@ import { ThemeService } from '../../services/theme.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-theme-details',
-  templateUrl: './theme-details.component.html',
-  styleUrls: ['./theme-details.component.scss']
+  selector: 'app-theme',
+  templateUrl: './theme.component.html',
+  styleUrls: ['./theme.component.scss']
 })
-export class ThemeDetailsComponent implements OnInit {
+export class ThemeComponent implements OnInit {
   theme: ITheme;
 
   constructor(public auth: AuthService,

@@ -31,6 +31,6 @@ export class ClubSummaryComponent {
   constructor(private clubService: ClubService, private themeService: ThemeService, private router: Router) {}
 
   viewClubPage(id: number) {
-    this.router.navigate([`/club/${id}`]);
+    this.router.navigate([`/clubs/${id}`]);
   }
 }

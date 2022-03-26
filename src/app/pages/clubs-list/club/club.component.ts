@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {IClub, ITheme, IUser, IUserMembership, ThemeStatus} from '../../models/data-models';
-import { ApiService } from '../../services/api.service';
-import { AuthService } from '../../services/auth.service';
-import { ClubService } from '../../services/club.service';
-import { ThemeService } from '../../services/theme.service';
-import { UserService } from '../../services/user.service';
+import {IClub, ITheme, IUser, IUserMembership, ThemeStatus} from '../../../models/data-models';
+import { ApiService } from '../../../services/api.service';
+import { AuthService } from '../../../services/auth.service';
+import { ClubService } from '../../../services/club.service';
+import { ThemeService } from '../../../services/theme.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
-  selector: 'app-club-details',
-  templateUrl: './club-details.component.html',
-  styleUrls: ['./club-details.component.scss']
+  selector: 'app-club',
+  templateUrl: './club.component.html',
+  styleUrls: ['./club.component.scss']
 })
-export class ClubDetailsComponent implements OnInit {
+export class ClubComponent implements OnInit {
   id: string;
   club: IClub;
   members: IUserMembership[];

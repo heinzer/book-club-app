@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
         mergeMap(() => this.auth.getCurrentUserMemberships())
       )
       .subscribe(
-        response => this.router.navigate(['/']),
+        response => this.router.navigate(['/clubs']),
         error => this.error = error
       );
   }

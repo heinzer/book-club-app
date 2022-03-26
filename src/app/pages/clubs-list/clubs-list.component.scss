@@ -2,13 +2,14 @@
   .row {
     display: flex;
     padding: 20px;
+    align-content: flex-end;
     justify-content: space-between;
     flex-direction: row;
 
     .left {
       display: flex;
       width: auto;
-      align-items: flex-end;
+      align-items: center;
 
       h3 {
         margin: 0px;
@@ -16,9 +17,9 @@
 
       .new {
         margin-left: 10px;
-        color: var(--green);
-        transition: 0.2 all;
-        opacity: 0.4;
+        color: var(--olive);
+        opacity: 0.7;
+        font-size: 20px;
 
         :hover {
           opacity: 1;

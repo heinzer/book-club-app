@@ -20,6 +20,7 @@ import { StylePreviewComponent } from './pages/style-preview/style-preview.compo
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ProfileComponent} from './pages/profile/profile.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 // import { AuthService } from './services/auth.service';
 
@@ -45,7 +46,8 @@ import {ProfileComponent} from './pages/profile/profile.component';
     HttpClientModule,
     SharedModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    FontAwesomeModule
     // AuthService
   ],
   providers: [

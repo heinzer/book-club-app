@@ -1,12 +1,14 @@
 <div class="clubs">
-  <div class="club" (click)="viewClubPage(club.id)">
-    <div class="left">
-      <h2>{{club.name}}</h2>
-      <p *ngIf="currentTheme">Current theme: {{currentTheme.name}}</p>
-      <p *ngIf="currentTheme">Next deadline: {{currentTheme | fancyDeadline}}</p>
+  <app-solid-container (click)="viewClubPage(club.id)">
+    <div class="club">
+      <div class="left">
+        <h2>{{club.name}}</h2>
+        <p *ngIf="currentTheme">Current theme: {{currentTheme.name}}</p>
+        <p *ngIf="currentTheme">Next deadline: {{currentTheme | fancyDeadline}}</p>
+      </div>
+      <div class="members">
+        <p>{{memberships?.length}}</p><fa-icon icon="users"></fa-icon>
+      </div>
     </div>
-    <div class="members">
-      <p>{{memberships?.length}}</p><fa-icon icon="users"></fa-icon>
-    </div>
-  </div>
+  </app-solid-container>
 </div>

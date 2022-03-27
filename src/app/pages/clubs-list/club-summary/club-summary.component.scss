@@ -1,16 +1,16 @@
-.club {
-  border: 1px solid var(--lightgray);
-  border-radius: 6px;
-  display: flex;
-  justify-content: space-between;
+app-solid-container {
   margin-bottom: 20px;
-  padding: 20px;
   transition: .1s ease-out all;
-
   &:hover {
     cursor: pointer;
     border: 1px solid var(--darkblue);
   }
+}
+
+.club {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
 
   h2 {
     margin: 0px;

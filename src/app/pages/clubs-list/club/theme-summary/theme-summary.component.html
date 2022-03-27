@@ -1,8 +1,10 @@
-<div class="themes">
-  <div class="theme">
-    <div class="left">
-      <h2 (click)="viewTheme(theme.id)">{{theme.name}}</h2>
-      <p>{{theme | fancyDeadline}}</p>
+<app-solid-container-with-hover (click)="viewTheme(theme.id)">
+  <div class="themes">
+    <div class="theme">
+      <div class="left">
+        <h2>{{theme.name}}</h2>
+        <p>{{theme | fancyDeadline}}</p>
+      </div>
     </div>
   </div>
-</div>
+</app-solid-container-with-hover>

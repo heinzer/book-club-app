@@ -1,15 +1,14 @@
+app-solid-container-with-hover {
+  margin-bottom: 20px;
+  transition: .1s ease-out all;
+}
+
 .theme {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
 
   h2 {
     margin: 0px;
-
-    &:hover {
-      color: var(--darkblue);
-      cursor: pointer;
-    }
   }
 
   p {
@@ -20,11 +19,5 @@
     :nth-child(2) {
       margin: 10px 0px;
     }
-  }
-
-  .right {
-    justify-content: space-between;
-    display: flex;
-    flex-direction: column;
   }
 }

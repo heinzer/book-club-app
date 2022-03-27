@@ -1,0 +1,10 @@
+:host {
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  &:hover {
+    cursor: pointer;
+    border: 1px solid var(--darkblue);
+  }
+}

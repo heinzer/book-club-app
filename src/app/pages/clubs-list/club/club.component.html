@@ -21,7 +21,12 @@
         <app-theme-summary [theme]="theme"></app-theme-summary>
       </ng-container>
       <app-dotted-container *ngIf="!openThemes?.length">
-        <button>Add Theme</button>
+        <div class="no-themes-container">
+          <p>No themes have been added</p>
+          <button class="secondary-button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#new-theme">+ Add Theme</button>
+        </div>
       </app-dotted-container>
 
       <ng-container *ngIf="closedThemes?.length">

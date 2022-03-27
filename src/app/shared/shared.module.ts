@@ -4,10 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from '../app.component';
 import { PasswordInputComponent } from './password-input/password-input.component';
 import { FancyDeadlinePipe, DeadlinePipe, DeadlinePercentagePipe } from './deadlines.pipe';
-import * as dayjs from 'dayjs';
+import {DottedContainerComponent} from './dotted-container/dotted-container.component';
+import {BasePageComponent} from './base-page/base-page.component';
 
 export const components = [
+  BasePageComponent,
   PasswordInputComponent,
+  DottedContainerComponent
 ];
 
 export const pipes = [

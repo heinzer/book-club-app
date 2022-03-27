@@ -1,82 +1,92 @@
-<div class="club-component">
-  <div class="row">
-    <div class="left">
-      <h3 *ngIf="club">{{club.name}}</h3>
+<app-base-page>
+  <div class="club-component">
+    <div class="row">
+      <div class="left">
+        <h3 *ngIf="club">{{club.name}}</h3>
+      </div>
+
+      <div class="input-pair">
+        <label for="sort">Sort by</label>
+        <select name="sort" id="sort">
+          <option value="join">Join date</option>
+          <option value="alpha">Alphabetical</option>
+          <option value="deadline">Upcoming Deadline</option>
+        </select>
+      </div>
     </div>
 
-    <div class="input-pair">
-      <label for="sort">Sort by</label>
-      <select name="sort" id="sort">
-        <option value="join">Join date</option>
-        <option value="alpha">Alphabetical</option>
-        <option value="deadline">Upcoming Deadline</option>
-      </select>
-    </div>
-  </div>
+    <div class="club-content">
+      <div class="left">
+        <h3>
+          Open Themes
+          <button class="main-button inline new"
+                  data-bs-toggle="modal"
+                  data-bs-target="#new-theme"
+                  *ngIf="isCurrentUserAdminOfClub() && openThemes?.length">
+            <fa-icon icon="plus-circle"></fa-icon>
+          </button>
+        </h3>
+        <ng-container *ngFor="let theme of openThemes">
+          <app-theme-summary [theme]="theme"></app-theme-summary>
+        </ng-container>
+        <app-dotted-container *ngIf="!openThemes?.length">
+          <button>Add Theme</button>
+        </app-dotted-container>
 
-  <div class="club-content">
-    <div class="left">
-      <h3>
-        Open Themes
-        <button class="main-button inline new" data-bs-toggle="modal" data-bs-target="#new-theme" *ngIf="isCurrentUserAdminOfClub()">
-          <fa-icon icon="plus-circle"></fa-icon>
-        </button>
-      </h3>
-      <ng-container *ngFor="let theme of openThemes">
-        <app-theme [theme]="theme"></app-theme>
-      </ng-container>
-
-      <h3>Closed Themes</h3>
-      <ng-container *ngFor="let theme of closedThemes">
-        <app-theme [theme]="theme"></app-theme>
-      </ng-container>
-    </div>
-
-    <div class="right">
-      <div class="members-list" *ngIf="members && members.length > 0">
-        <h3>Members</h3>
-        <ng-container *ngFor="let member of members">
-          <h4>{{ member.firstName }} {{ member.lastName ? member.lastName[0] : '' }} {{ member.isAdmin ? '(admin)' : '' }}</h4>
+        <ng-container *ngIf="closedThemes?.length">
+          <h3>Closed Themes</h3>
+          <ng-container *ngFor="let theme of closedThemes">
+            <app-theme-summary [theme]="theme"></app-theme-summary>
+          </ng-container>
         </ng-container>
       </div>
-    </div>
-  </div>
-</div>
 
-<div class="modal fade new-theme-modal" id="new-theme" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create a theme</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="right">
+        <div class="members-list" *ngIf="members && members.length > 0">
+          <h3>Members</h3>
+          <ng-container *ngFor="let member of members">
+            <h4>{{ member.firstName }} {{ member.lastName ? member.lastName[0] : '' }} {{ member.isAdmin ? '(admin)' : '' }}</h4>
+          </ng-container>
+        </div>
       </div>
-      <form [formGroup]="newThemeForm" (ngSubmit)="createTheme()">
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="theme-name" class="col-form-label">Name</label>
-            <input type="text" class="form-control" id="theme-name" formControlName="name">
-          </div>
-          <div class="mb-3">
-            <label for="theme-description" class="col-form-label">Description</label>
-            <textarea class="form-control" id="theme-description" formControlName="description"></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="nomination-deadline" class="col-form-label">Nomination Deadline</label>
-            <input type="date" class="form-control" id="nomination-deadline" formControlName="nominationDeadline">
-          </div>
-          <div class="mb-3">
-            <label for="voting-deadline" class="col-form-label">Voting Deadline</label>
-            <input type="date" class="form-control" id="voting-deadline" formControlName="votingDeadline">
-          </div>
-          <div class="mb-3">
-            <label for="discussion-deadline" class="col-form-label">Discussion Deadline</label>
-            <input type="datetime-local" class="form-control" id="discussion-deadline" formControlName="discussionDeadline">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" [disabled]="newThemeForm.invalid">Create</button>
-        </div>
-      </form>
     </div>
   </div>
-</div>
+
+  <div class="modal fade new-theme-modal" id="new-theme" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create a theme</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="newThemeForm" (ngSubmit)="createTheme()">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="theme-name" class="col-form-label">Name</label>
+              <input type="text" class="form-control" id="theme-name" formControlName="name">
+            </div>
+            <div class="mb-3">
+              <label for="theme-description" class="col-form-label">Description</label>
+              <textarea class="form-control" id="theme-description" formControlName="description"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="nomination-deadline" class="col-form-label">Nomination Deadline</label>
+              <input type="date" class="form-control" id="nomination-deadline" formControlName="nominationDeadline">
+            </div>
+            <div class="mb-3">
+              <label for="voting-deadline" class="col-form-label">Voting Deadline</label>
+              <input type="date" class="form-control" id="voting-deadline" formControlName="votingDeadline">
+            </div>
+            <div class="mb-3">
+              <label for="discussion-deadline" class="col-form-label">Discussion Deadline</label>
+              <input type="datetime-local" class="form-control" id="discussion-deadline" formControlName="discussionDeadline">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="newThemeForm.invalid">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</app-base-page>

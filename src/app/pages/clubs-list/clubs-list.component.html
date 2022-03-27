@@ -1,27 +1,28 @@
-<div class="clubs-list-component">
-  <div class="row">
-    <div class="left">
-      <h3>My Clubs</h3>
-      <button class="main-button inline new" data-bs-toggle="modal" data-bs-target="#new-theme">
-        <fa-icon icon="plus-circle"></fa-icon>
-      </button>
+<app-base-page>
+  <div class="clubs-list-component">
+    <div class="row">
+      <div class="left">
+        <h3>My Clubs</h3>
+        <button class="main-button inline new" data-bs-toggle="modal" data-bs-target="#new-theme">
+          <fa-icon icon="plus-circle"></fa-icon>
+        </button>
+      </div>
+
+      <div class="input-pair">
+        <label for="sort">Sort by</label>
+        <select name="sort" id="sort">
+          <option value="join">Join date</option>
+          <option value="alpha">Alphabetical</option>
+          <option value="deadline">Upcoming Deadline</option>
+        </select>
+      </div>
     </div>
 
-    <div class="input-pair">
-      <label for="sort">Sort by</label>
-      <select name="sort" id="sort">
-        <option value="join">Join date</option>
-        <option value="alpha">Alphabetical</option>
-        <option value="deadline">Upcoming Deadline</option>
-      </select>
-    </div>
+    <ng-container *ngFor="let club of clubs">
+      <app-club-summary [club]="club"></app-club-summary>
+    </ng-container>
   </div>
-
-  <ng-container *ngFor="let club of clubs">
-    <app-club-summary [club]="club"></app-club-summary>
-  </ng-container>
-
-</div>
+</app-base-page>
 
 <div class="modal fade new-theme-modal" id="new-theme" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

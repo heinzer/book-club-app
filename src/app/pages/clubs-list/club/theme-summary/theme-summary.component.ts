@@ -9,7 +9,7 @@ import { ThemeService } from '../../../../services/theme.service';
 dayjs.extend(advancedFormat)
 
 @Component({
-  selector: 'app-theme',
+  selector: 'app-theme-summary',
   templateUrl: './theme-summary.component.html',
   styleUrls: ['./theme-summary.component.scss']
 })

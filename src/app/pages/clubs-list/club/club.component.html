@@ -4,20 +4,11 @@
     <div class="left">
       <h3 *ngIf="club">{{club.name}}</h3>
     </div>
-
-    <div class="input-pair">
-      <label for="sort">Sort by</label>
-      <select name="sort" id="sort">
-        <option value="join">Join date</option>
-        <option value="alpha">Alphabetical</option>
-        <option value="deadline">Upcoming Deadline</option>
-      </select>
-    </div>
   </div>
 
   <div class="panel-with-sidebar">
     <div class="left">
-      <h3>
+      <h4>
         Open Themes
         <button class="main-button inline new"
                 data-bs-toggle="modal"
@@ -25,7 +16,7 @@
                 *ngIf="isCurrentUserAdminOfClub() && openThemes?.length">
           <fa-icon icon="plus-circle"></fa-icon>
         </button>
-      </h3>
+      </h4>
       <ng-container *ngFor="let theme of openThemes">
         <app-theme-summary [theme]="theme"></app-theme-summary>
       </ng-container>
@@ -34,7 +25,7 @@
       </app-dotted-container>
 
       <ng-container *ngIf="closedThemes?.length">
-        <h3 class="closed-theme">Closed Themes</h3>
+        <h4 class="closed-theme">Closed Themes</h4>
         <ng-container *ngFor="let theme of closedThemes">
           <app-theme-summary [theme]="theme"></app-theme-summary>
         </ng-container>
@@ -42,14 +33,12 @@
     </div>
 
     <div class="right" *ngIf="members && members.length > 0">
-      <app-solid-container>
-        <div>
-          <h3>Members</h3>
-          <ng-container *ngFor="let member of members">
-            <h5>{{ member.firstName }} {{ member.lastName ? member.lastName[0] : '' }} {{ member.isAdmin ? '(admin)' : '' }}</h5>
-          </ng-container>
-        </div>
-      </app-solid-container>
+      <div class="members">
+        <h4>Members</h4>
+        <ng-container *ngFor="let member of members">
+          <h6>{{ member.firstName }} {{ member.lastName ? member.lastName[0] : '' }} {{ member.isAdmin ? '(admin)' : '' }}</h6>
+        </ng-container>
+      </div>
     </div>
   </div>
 

@@ -62,7 +62,6 @@ export class ClubComponent implements OnInit {
   }
 
   createTheme() {
-    console.log(this.newThemeForm)
     let formFields: ITheme = {
       clubId: this.club?.id,
       nominatorId: this.api.currentUser?.id,

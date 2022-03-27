@@ -31,7 +31,6 @@ export class DeadlineComponent {
   @Input()
   set percentage(percentage: number) {
     this._percentage = percentage;
-    console.log('percentage:',percentage)
   }
 
   get percentage(): number {

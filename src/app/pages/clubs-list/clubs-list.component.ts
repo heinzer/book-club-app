@@ -28,7 +28,6 @@ export class ClubsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('home component');
     // check that the user is authenticated
     if (!this.api.currentUser) {
       this.router.navigate(['/login']);

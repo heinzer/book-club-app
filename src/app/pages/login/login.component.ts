@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
   }
 
   tryLogin() {
-    console.log('login component');
     this.auth.login(this.email, this.password)
       .pipe(
         mergeMap(() => this.auth.getCurrentUser()),

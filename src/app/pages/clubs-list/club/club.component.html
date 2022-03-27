@@ -2,7 +2,6 @@
   <div class="row">
     <div class="left">
       <h3 *ngIf="club">{{club.name}}</h3>
-      <!-- <button class="main-button inline new">+ new</button> -->
     </div>
 
     <div class="input-pair">
@@ -19,7 +18,9 @@
     <div class="left">
       <h3>
         Open Themes
-        <button class="main-button inline new" data-bs-toggle="modal" data-bs-target="#new-theme" *ngIf="isCurrentUserAdminOfClub()">+ new</button>
+        <button class="main-button inline new" data-bs-toggle="modal" data-bs-target="#new-theme" *ngIf="isCurrentUserAdminOfClub()">
+          <fa-icon icon="plus-circle"></fa-icon>
+        </button>
       </h3>
       <ng-container *ngFor="let theme of openThemes">
         <app-theme [theme]="theme"></app-theme>

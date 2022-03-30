@@ -17,7 +17,7 @@ export interface LoginResponse {
 }
 
 export interface IClub {
-  id: number;
+  id?: number;
   name: string;
 }
 

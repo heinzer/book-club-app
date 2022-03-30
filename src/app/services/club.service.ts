@@ -32,7 +32,15 @@ export class ClubService {
     return this.http.get<ITheme>(`${this.clubUrl(clubId)}/current-theme`);
   }
 
-  createClub(clubName: number): Observable<IClub> {
-    return this.http.post<IClub>(this.clubBaseUrl, { adminId: this.api.currentUser?.id, name: clubName });
+  createClub(club: IClub): Observable<IClub> {
+    return this.http.post<IClub>(this.clubBaseUrl, { adminId: this.api.currentUser?.id, ...club });
+  }
+
+  editClub(club: IClub): Observable<IClub> {
+    return this.http.put<IClub>(this.clubUrl(club.id), {...club});
+  }
+
+  deleteClub(clubId: number): Observable<void> {
+    return this.http.delete<void>(this.clubUrl(clubId));
   }
 }

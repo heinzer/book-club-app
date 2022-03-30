@@ -5,6 +5,7 @@ import { ClubService } from '../../../services/club.service';
 import { ThemeService } from '../../../services/theme.service';
 import * as dayjs from 'dayjs';
 import * as advancedFormat from 'dayjs/plugin/advancedFormat';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 dayjs.extend(advancedFormat)
 
 @Component({
@@ -28,9 +29,11 @@ export class ClubSummaryComponent {
   memberships: IUser[];
   currentTheme: ITheme;
 
-  constructor(private clubService: ClubService, private themeService: ThemeService, private router: Router) {}
+  constructor(private clubService: ClubService,
+              private themeService: ThemeService,
+              private router: Router) {}
 
-  viewClubPage(id: number) {
+  viewClubPage(id: number): void {
     this.router.navigate([`/clubs/${id}`]);
   }
 }

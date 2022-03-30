@@ -62,7 +62,7 @@ h3 {
   padding: 10px;
   font-family: RobotoSlab-Regular;
   border-radius: 7px;
-  border: none;
+  border: 1.5px solid var(--olive);
   cursor: pointer;
   &:hover {
     opacity: 0.6;
@@ -85,6 +85,7 @@ h3 {
 
 .main-button.inline {
   background-color: transparent;
+  border: none;
   color: var(--olive);
   padding: 0px 0px 0px 5px;
   font-size: 16px;

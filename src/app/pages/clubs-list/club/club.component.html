@@ -2,7 +2,12 @@
 
   <div class="row">
     <div class="left">
-      <h3 *ngIf="club">{{club.name}}</h3>
+      <h3 *ngIf="club">{{club.name}}
+        <button class="main-button inline"
+                *ngIf="isCurrentUserAdminOfClub()">
+          <fa-icon icon="pencil" (click)="clubModalComponent.editClub(club)"></fa-icon>
+        </button>
+      </h3>
     </div>
   </div>
 
@@ -10,10 +15,9 @@
     <div class="left">
       <h4>
         Open Themes
-        <button class="main-button inline new"
-                data-bs-toggle="modal"
-                data-bs-target="#new-theme"
-                *ngIf="isCurrentUserAdminOfClub() && openThemes?.length">
+        <button class="main-button inline"
+                *ngIf="isCurrentUserAdminOfClub() && openThemes?.length"
+                (click)="themeModalComponent.createTheme(club.id)">
           <fa-icon icon="plus-circle"></fa-icon>
         </button>
       </h4>
@@ -23,9 +27,7 @@
       <app-dotted-container *ngIf="!openThemes?.length">
         <div class="no-themes-container">
           <p>No themes have been added</p>
-          <button class="secondary-button"
-                  data-bs-toggle="modal"
-                  data-bs-target="#new-theme">+ Add Theme</button>
+          <button class="secondary-button" (click)="themeModalComponent.createTheme(club.id)">+ Add Theme</button>
         </div>
       </app-dotted-container>
 
@@ -46,42 +48,7 @@
       </div>
     </div>
   </div>
-
-  <div class="modal fade new-theme-modal" id="new-theme" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Create a theme</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form [formGroup]="newThemeForm" (ngSubmit)="createTheme()">
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="theme-name" class="col-form-label">Name</label>
-              <input type="text" class="form-control" id="theme-name" formControlName="name">
-            </div>
-            <div class="mb-3">
-              <label for="theme-description" class="col-form-label">Description</label>
-              <textarea class="form-control" id="theme-description" formControlName="description"></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="nomination-deadline" class="col-form-label">Nomination Deadline</label>
-              <input type="date" class="form-control" id="nomination-deadline" formControlName="nominationDeadline">
-            </div>
-            <div class="mb-3">
-              <label for="voting-deadline" class="col-form-label">Voting Deadline</label>
-              <input type="date" class="form-control" id="voting-deadline" formControlName="votingDeadline">
-            </div>
-            <div class="mb-3">
-              <label for="discussion-deadline" class="col-form-label">Discussion Deadline</label>
-              <input type="datetime-local" class="form-control" id="discussion-deadline" formControlName="discussionDeadline">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" [disabled]="newThemeForm.invalid">Create</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 </app-base-page>
+
+<app-club-modal (refreshEvent)="refreshWithUpdatedClub($event)"></app-club-modal>
+<app-theme-modal (refreshEvent)="refreshWithNewTheme($event)"></app-theme-modal>

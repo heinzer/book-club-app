@@ -21,7 +21,9 @@ import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ProfileComponent} from './pages/profile/profile.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import {faPlusCircle, faUsers} from '@fortawesome/free-solid-svg-icons';
+import {faPencil, faPlusCircle, faUsers} from '@fortawesome/free-solid-svg-icons';
+import {ClubModalComponent} from './pages/clubs-list/club-modal/club-modal.component';
+import {ThemeModalComponent} from './pages/clubs-list/club/theme-modal/theme-modal.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +31,14 @@ import {faPlusCircle, faUsers} from '@fortawesome/free-solid-svg-icons';
     ClubSummaryComponent,
     ClubsListComponent,
     ClubComponent,
+    ClubModalComponent,
     DeadlineComponent,
     LoginComponent,
     ProfileComponent,
     RegisterComponent,
     StylePreviewComponent,
     ThemeComponent,
+    ThemeModalComponent,
     ThemeSummaryComponent
   ],
   imports: [
@@ -61,6 +65,6 @@ import {faPlusCircle, faUsers} from '@fortawesome/free-solid-svg-icons';
 export class AppModule {
   constructor(library: FaIconLibrary) {
     // Add an icon to the library for convenient access in other components
-    library.addIcons(faPlusCircle, faUsers);
+    library.addIcons(faPlusCircle, faUsers, faPencil);
   }
 }

@@ -1,0 +1,41 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{ isEdit ? 'Edit' : 'Create' }} Theme</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.close(ModalResults.CANCEL)"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="themeForm">
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="theme-name" class="col-form-label">Name</label>
+          <input type="text" class="form-control" id="theme-name" formControlName="name">
+        </div>
+        <div class="mb-3">
+          <label for="theme-description" class="col-form-label">Description</label>
+          <textarea class="form-control" id="theme-description" formControlName="description"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="nomination-deadline" class="col-form-label">Nomination Deadline</label>
+          <input type="date" class="form-control" id="nomination-deadline" formControlName="nominationDeadline">
+        </div>
+        <div class="mb-3">
+          <label for="voting-deadline" class="col-form-label">Voting Deadline</label>
+          <input type="date" class="form-control" id="voting-deadline" formControlName="votingDeadline">
+        </div>
+        <div class="mb-3">
+          <label for="discussion-deadline" class="col-form-label">Discussion Deadline</label>
+          <input type="datetime-local" class="form-control" id="discussion-deadline" formControlName="discussionDeadline">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="isEdit" type="button" class="btn btn-danger" (click)="modal.close(ModalResults.DELETE)">Delete</button>
+    <button type="button" class="btn btn-primary"
+            [disabled]="themeForm.invalid"
+            (click)="modal.close(ModalResults.SAVE)">
+      {{ isEdit ? 'Save' : 'Create' }}
+    </button>
+    <button type="button" class="btn btn-light" (click)="modal.close(ModalResults.CANCEL)">Close</button>
+  </div>
+</ng-template>

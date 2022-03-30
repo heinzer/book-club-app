@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { IClub } from '../../models/data-models';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
-import { ClubService } from '../../services/club.service';
 import { UserService } from '../../services/user.service';
+import {ClubModalComponent} from './club-modal/club-modal.component';
 
 @Component({
   selector: 'app-clubs-list',
@@ -13,18 +12,14 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./clubs-list.component.scss']
 })
 export class ClubsListComponent implements OnInit {
+  @ViewChild(ClubModalComponent) clubModalComponent: ClubModalComponent;
+
   clubs: IClub[] = [];
-  newClubForm: FormGroup;
 
   constructor(public auth: AuthService,
               private api: ApiService,
               private router: Router,
-              private userService: UserService,
-              private clubService: ClubService,
-              private form: FormBuilder) {
-    this.newClubForm = form.group({
-      name: ["", Validators.required],
-    });
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -36,10 +31,7 @@ export class ClubsListComponent implements OnInit {
     }
   }
 
-  createClub(): void {
-    this.clubService.createClub(this.newClubForm.value.name).subscribe(club => {
-      this.userService.getMembershipsForCurrentUser().subscribe(clubs => this.clubs = clubs);
-    })
+  refreshWithNewClub(club: IClub): void {
+    this.clubs.push(club);
   }
-
 }

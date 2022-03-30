@@ -21,6 +21,13 @@
   <ng-container *ngFor="let club of clubs">
     <app-club-summary [club]="club"></app-club-summary>
   </ng-container>
+
+  <app-dotted-container *ngIf="!clubs?.length">
+    <div class="no-themes-container">
+      <p>No clubs have been added</p>
+      <button class="secondary-button" (click)="clubModalComponent.createClub()">+ Add Club</button>
+    </div>
+  </app-dotted-container>
 </app-base-page>
 
 <app-club-modal (refreshEvent)="refreshWithNewClub($event)"></app-club-modal>

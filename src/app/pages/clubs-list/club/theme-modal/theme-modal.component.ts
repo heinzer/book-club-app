@@ -14,7 +14,7 @@ import {ClubService} from '../../../../services/club.service';
 })
 export class ThemeModalComponent {
   @ViewChild(`content`) content;
-  @Output() public refreshEvent: EventEmitter<number> = new EventEmitter<number>();
+  @Output() public refreshEvent: EventEmitter<ITheme> = new EventEmitter<ITheme>();
 
   themeForm: FormGroup;
   isEdit: boolean = false;
@@ -78,9 +78,9 @@ export class ThemeModalComponent {
             discussionDeadline: new Date(this.themeForm.value.discussionDeadline).toString(),
           }
           this.themeService.createTheme(newTheme)
-            .subscribe(club => {
+            .subscribe(theme => {
               this.isLoading = false;
-              this.refreshEvent.next(club.id);
+              this.refreshEvent.next(theme);
             });
         }
       },

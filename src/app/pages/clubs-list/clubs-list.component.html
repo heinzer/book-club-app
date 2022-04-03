@@ -1,22 +1,8 @@
 <app-base-page>
-  <div class="row">
-    <div class="left">
-      <h3>My Clubs</h3>
-      <button class="main-button inline new">
-        <fa-icon icon="plus-circle"
-                 (click)="clubModalComponent.createClub()"></fa-icon>
-      </button>
-    </div>
-
-    <div class="input-pair">
-      <label for="sort">Sort by</label>
-      <select name="sort" id="sort">
-        <option value="join">Join date</option>
-        <option value="alpha">Alphabetical</option>
-        <option value="deadline">Upcoming Deadline</option>
-      </select>
-    </div>
-  </div>
+  <app-page-header [label]="'My Clubs'">
+    <app-icon-button [icon]="'plus-circle'"
+                     (click)="clubModalComponent.createClub()"></app-icon-button>
+  </app-page-header>
 
   <ng-container *ngFor="let club of clubs">
     <app-club-summary [club]="club"></app-club-summary>

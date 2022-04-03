@@ -1,28 +1,19 @@
 <app-base-page>
-
-  <div class="row">
-    <div class="left">
-      <h3 *ngIf="club">{{club.name}}
-        <button class="main-button inline"
-                *ngIf="isCurrentUserAdminOfClub()">
-          <fa-icon icon="pencil" (click)="clubModalComponent.editClub(club)"></fa-icon>
-        </button>
-      </h3>
-    </div>
-  </div>
-
+  <app-page-header [label]="club.name">
+    <app-icon-button *ngIf="api.isCurrentUserAdminOfClub(id)"
+                     [icon]="'pencil'"
+                     (click)="clubModalComponent.editClub(club)"></app-icon-button>
+  </app-page-header>
   <div class="panel-with-sidebar">
     <div class="left">
       <h4>
         Open Themes
-        <button class="main-button inline"
-                *ngIf="isCurrentUserAdminOfClub() && openThemes?.length"
-                (click)="themeModalComponent.createTheme(club.id)">
-          <fa-icon icon="plus-circle"></fa-icon>
-        </button>
+        <app-icon-button *ngIf="api.isCurrentUserAdminOfClub(this.id) && openThemes?.length"
+                         [icon]="'plus-circle'"
+                         (click)="themeModalComponent.createTheme(club.id)"></app-icon-button>
       </h4>
       <ng-container *ngFor="let theme of openThemes">
-        <app-theme-summary [theme]="theme"></app-theme-summary>
+        <app-theme-summary [theme]="theme" [clubId]="id"></app-theme-summary>
       </ng-container>
       <app-dotted-container *ngIf="!openThemes?.length">
         <div class="no-themes-container">
@@ -34,7 +25,7 @@
       <ng-container *ngIf="closedThemes?.length">
         <h4 class="closed-theme">Closed Themes</h4>
         <ng-container *ngFor="let theme of closedThemes">
-          <app-theme-summary [theme]="theme"></app-theme-summary>
+          <app-theme-summary [theme]="theme" [clubId]="id"></app-theme-summary>
         </ng-container>
       </ng-container>
     </div>

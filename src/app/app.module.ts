@@ -51,7 +51,6 @@ import {ThemeModalComponent} from './pages/clubs-list/club/theme-modal/theme-mod
     ReactiveFormsModule,
     NgbModule,
     FontAwesomeModule
-    // AuthService
   ],
   providers: [
     {
@@ -59,6 +58,8 @@ import {ThemeModalComponent} from './pages/clubs-list/club/theme-modal/theme-mod
       useClass: APIHttpInterceptor,
       multi: true
     },
+  ],
+  exports: [
   ],
   bootstrap: [AppComponent]
 })

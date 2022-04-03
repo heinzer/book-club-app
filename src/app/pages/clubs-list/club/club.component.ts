@@ -27,7 +27,7 @@ export class ClubComponent implements OnInit {
   openThemes: ITheme[];
   closedThemes: ITheme[];
 
-  constructor(private api: ApiService,
+  constructor(public api: ApiService,
               private clubService: ClubService,
               private themeService: ThemeService,
               private router: Router,
@@ -39,7 +39,7 @@ export class ClubComponent implements OnInit {
       this.router.navigate(['/login']);
     } else {
       this.route.params.subscribe(params => {
-        this.id = params['id']
+        this.id = +params['clubId']
         this.clubService.getClub(this.id).subscribe(club => this.club = club);
         this.clubService.getMembershipsForClub(this.id).subscribe(members => this.members = members);
         this.fetchThemes();
@@ -55,17 +55,13 @@ export class ClubComponent implements OnInit {
     });
   }
 
-  isCurrentUserAdminOfClub(): boolean {
-    return this.api.currentUserMemberships.find(clubMembership => clubMembership.id === +this.id)?.isAdmin;
-  }
-
   refreshWithUpdatedClub(club: IClub): void {
     this.club = club;
     // todo: get memberships for club once we allow membership edits
   }
 
-  refreshWithNewTheme(themeId: number): void {
-    this.themeService.getTheme(themeId).subscribe(theme => {
+  refreshWithNewTheme(theme: ITheme): void {
+    this.themeService.getTheme(theme.id).subscribe(theme => {
       this.themes.push(theme);
       this.openThemes.push(theme);
     });

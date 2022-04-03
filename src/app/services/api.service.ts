@@ -67,4 +67,8 @@ export class ApiService {
   removeStoredItem(key:string) {
     return this.storage.removeItem(key);
   }
+
+  isCurrentUserAdminOfClub(clubId: number): boolean {
+    return this.currentUserMemberships.find(clubMembership => clubMembership.id === clubId)?.isAdmin;
+  }
 }

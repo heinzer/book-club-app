@@ -10,8 +10,8 @@ import {ProfileComponent} from './pages/profile/profile.component';
 
 const routes: Routes = [
   { path: 'clubs', component: ClubsListComponent },
-  { path: 'clubs/:id', component: ClubComponent },
-  { path: 'themes/:id', component: ThemeComponent },
+  { path: 'clubs/:clubId', component: ClubComponent },
+  { path: 'clubs/:clubId/themes/:id', component: ThemeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },

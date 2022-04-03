@@ -8,10 +8,16 @@ import {DottedContainerComponent} from './containers/dotted-container/dotted-con
 import {BasePageComponent} from './base-page/base-page.component';
 import {SolidContainerComponent} from './containers/solid-container/solid-container.component';
 import {SolidContainerWithHoverComponent} from './containers/solid-container-with-hover/solid-container-with-hover.component';
+import {PageHeaderComponent} from './page-header/page-header.component';
+import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {faPencil, faPlusCircle, faUsers} from '@fortawesome/free-solid-svg-icons';
+import {IconButtonComponent} from './icon-button/icon-button.component';
 
 export const components = [
   BasePageComponent,
   DottedContainerComponent,
+  IconButtonComponent,
+  PageHeaderComponent,
   PasswordInputComponent,
   SolidContainerComponent,
   SolidContainerWithHoverComponent
@@ -30,7 +36,8 @@ export const pipes = [
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   exports: [
     ...components,
@@ -39,4 +46,9 @@ export const pipes = [
   providers: [],
   bootstrap: [AppComponent]
 })
-export class SharedModule { }
+export class SharedModule {
+  constructor(library: FaIconLibrary) {
+    // Add an icon to the library for convenient access in other components
+    library.addIcons(faPlusCircle, faUsers, faPencil);
+  }
+}

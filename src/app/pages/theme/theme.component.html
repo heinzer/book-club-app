@@ -1,15 +1,21 @@
-<div class="theme-details-component">
-  <ng-container *ngIf="theme">
-    <div class="row">
-      <h3>{{ theme.name }}</h3>
-      <p *ngIf="theme.description">{{ theme.description }}</p>
-
-      <div class="deadlines">
-        <app-deadline [date]="theme.nominationDeadline" [percentage]="theme.startDate | deadlinePercentage : theme.nominationDeadline" stage="Nominate"></app-deadline>
-        <app-deadline [date]="theme.votingDeadline" [percentage]="theme.nominationDeadline | deadlinePercentage : theme.votingDeadline" stage="Vote"></app-deadline>
-        <app-deadline [date]="theme.readingDeadline" [percentage]="theme.votingDeadline | deadlinePercentage : theme.readingDeadline" stage="Read"></app-deadline>
+<app-base-page>
+  <div class="theme-details-component">
+    <ng-container *ngIf="theme">
+      <app-page-header [label]="theme.name">
+        <app-icon-button *ngIf="api.isCurrentUserAdminOfClub(clubId)"
+                         [icon]="'pencil'"
+                         (click)="themeModalComponent.editTheme(theme)"></app-icon-button>
+      </app-page-header>
+      <div class="row">
+        <p *ngIf="theme.description">{{ theme.description }}</p>
+        <div class="deadlines">
+          <app-deadline [date]="theme.nominationDeadline" [percentage]="theme.startDate | deadlinePercentage : theme.nominationDeadline" stage="Nominate"></app-deadline>
+          <app-deadline [date]="theme.votingDeadline" [percentage]="theme.nominationDeadline | deadlinePercentage : theme.votingDeadline" stage="Vote"></app-deadline>
+          <app-deadline [date]="theme.readingDeadline" [percentage]="theme.votingDeadline | deadlinePercentage : theme.readingDeadline" stage="Read"></app-deadline>
+        </div>
       </div>
-    </div>
-  </ng-container>
+    </ng-container>
+  </div>
+</app-base-page>
 
-</div>
+<app-theme-modal (refreshEvent)="refreshWithUpdatedTheme($event)"></app-theme-modal>

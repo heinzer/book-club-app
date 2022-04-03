@@ -14,6 +14,7 @@ dayjs.extend(advancedFormat)
   styleUrls: ['./theme-summary.component.scss']
 })
 export class ThemeSummaryComponent {
+  @Input() clubId: number;
   private _theme: ITheme;
   @Input()
   set theme(theme: ITheme) {
@@ -27,6 +28,6 @@ export class ThemeSummaryComponent {
   constructor(private clubService: ClubService, private themeService: ThemeService, private router: Router) {}
 
   viewTheme(id: number) {
-    this.router.navigate([`/themes/${id}`]);
+    this.router.navigate([`clubs/${this.clubId}/themes/${id}`]);
   }
 }

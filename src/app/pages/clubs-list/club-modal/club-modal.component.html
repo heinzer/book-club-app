@@ -15,11 +15,13 @@
   </div>
   <div class="modal-footer">
     <button *ngIf="isEdit" type="button" class="btn btn-danger" (click)="modal.close(ModalResults.DELETE)">Delete</button>
-    <button type="button" class="btn btn-primary"
-            [disabled]="clubForm.invalid"
-            (click)="modal.close(ModalResults.SAVE)">
-      {{ isEdit ? 'Save' : 'Create' }}
-    </button>
-    <button type="button" class="btn btn-light" (click)="modal.close(ModalResults.CANCEL)">Cancel</button>
+    <div>
+      <button type="button" class="btn btn-primary"
+              [disabled]="clubForm.invalid"
+              (click)="modal.close(ModalResults.SAVE)">
+        {{ isEdit ? 'Save' : 'Create' }}
+      </button>
+      <button type="button" class="btn btn-light" (click)="modal.close(ModalResults.CANCEL)">Cancel</button>
+    </div>
   </div>
 </ng-template>

@@ -1,11 +1,12 @@
 import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ThemeService} from '../../../../services/theme.service';
 import {ITheme, ThemeStatus} from '../../../../models/data-models';
 import {ApiService} from '../../../../services/api.service';
 import {ClubService} from '../../../../services/club.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-theme-modal',
@@ -20,6 +21,7 @@ export class ThemeModalComponent {
   isEdit: boolean = false;
   isLoading: boolean = false;
   ModalResults = ModalResults;
+  model: NgbDateStruct;
 
   constructor(private api: ApiService,
               private clubService: ClubService,
@@ -30,43 +32,53 @@ export class ThemeModalComponent {
               private modalService: NgbModal) {
     this.themeForm = form.group({
       name: ["", Validators.required],
-      description: ["", Validators.required],
+      description: [""],
       nominationDeadline: ["", Validators.required],
       votingDeadline: ["", Validators.required],
       discussionDeadline: ["", Validators.required]
     });
   }
 
-
   editTheme(theme: ITheme): void {
-    /*    this.isEdit = true;
-        this.themeForm.setValue({
+    this.isEdit = true;
+    this.themeForm.setValue({
+      name: theme.name,
+      description: theme.description,
+      nominationDeadline: formatDate(theme.nominationDeadline, 'yyyy-MM-dd', 'en'),
+      votingDeadline: formatDate(theme.votingDeadline, 'yyyy-MM-dd', 'en'),
+      discussionDeadline: formatDate(theme.discussionDeadline, 'yyyy-MM-ddTHH:mm', 'en')
+    });
 
-        })
-
-        const clubModal = this.modalService.open(this.content);
-        clubModal.result.then(result => {
-          if (result === ModalResults.DELETE) {
-            this.themeService.deleteTheme(theme.id).subscribe(() => {
-              // this.router.navigate(['/clubs']);
-            });
-          } else if(result === ModalResults.SAVE) {
-            this.themeService.editTheme({id: theme.id, name: this.themeForm.value.name})
-              .subscribe(club => {
-                this.isLoading = false;
-                this.refreshEvent.next(club.id);
-              });
-          }
-        });*/
+    const clubModal = this.modalService.open(this.content);
+    clubModal.result.then(result => {
+      if (result === ModalResults.DELETE) {
+        this.themeService.deleteTheme(theme.id).subscribe(() => {
+          this.router.navigate([`/clubs/${theme.clubId}`]);
+        });
+      } else if (result === ModalResults.SAVE) {
+        this.themeService.editTheme({
+          ...theme,
+          name: this.themeForm.value.name,
+          description: this.themeForm.value.description,
+          nominationDeadline: new Date(this.themeForm.value.nominationDeadline).toString(),
+          votingDeadline: new Date(this.themeForm.value.votingDeadline).toString(),
+          readingDeadline: new Date(this.themeForm.value.discussionDeadline).toString(),
+          discussionDeadline: new Date(this.themeForm.value.discussionDeadline).toString(),
+        }).subscribe(theme => {
+          this.isLoading = false;
+          this.refreshEvent.next(theme);
+        });
+      }
+    });
   }
 
-  createTheme(themeId: number): void {
+  createTheme(clubId: number): void {
     this.isEdit = false;
     const clubModal = this.modalService.open(this.content);
     clubModal.result.then(result => {
         if (result === ModalResults.SAVE) {
           let newTheme: ITheme = {
-            clubId: themeId,
+            clubId: clubId,
             nominatorId: this.api.currentUser?.id,
             name: this.themeForm.value.name,
             description: this.themeForm.value.description,

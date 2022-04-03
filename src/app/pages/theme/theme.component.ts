@@ -15,6 +15,7 @@ import {ClubService} from '../../services/club.service';
 export class ThemeComponent implements OnInit {
   @ViewChild(ThemeModalComponent) themeModalComponent: ThemeModalComponent;
   theme: ITheme;
+  themeId: number;
   clubId: number;
   members: IUserMembership[];
   nominations = [];
@@ -32,13 +33,14 @@ export class ThemeComponent implements OnInit {
     } else {
       this.route.params.subscribe(params => {
         this.clubId = +params['clubId'];
-        this.themeService.getTheme(this.clubId).subscribe(theme => this.theme = theme);
+        this.themeId = +params['id'];
+        this.themeService.getTheme(this.themeId).subscribe(theme => this.theme = theme);
         this.clubService.getMembershipsForClub(this.clubId).subscribe(members => this.members = members);
       });
     }
   }
 
   refreshWithUpdatedTheme(theme: ITheme): void {
-
+    this.theme = theme;
   }
 }

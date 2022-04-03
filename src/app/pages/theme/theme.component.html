@@ -21,7 +21,7 @@
 <!--          <ng-container *ngFor="let theme of openThemes">
             <app-theme-summary [theme]="theme" [clubId]="id"></app-theme-summary>
           </ng-container>-->
-          <app-dotted-container *ngIf="nominations?.length">
+          <app-dotted-container *ngIf="!nominations?.length">
             <div class="no-themes-container">
               <p>No nominations have been added</p>
               <button class="secondary-button">+ Add Nomination</button>

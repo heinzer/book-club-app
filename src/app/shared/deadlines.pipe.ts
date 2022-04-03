@@ -1,9 +1,12 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 import * as dayjs from 'dayjs';
 import * as advancedFormat from 'dayjs/plugin/advancedFormat';
-import { ITheme, ThemeStatus } from '../models/data-models';
+import * as localizedFormat from 'dayjs/plugin/localizedFormat';
+import {ITheme, ThemeStatus} from '../models/data-models';
+import {ThemePhase} from '../pages/theme/deadline/deadline.component';
 
-dayjs.extend(advancedFormat)
+dayjs.extend(localizedFormat);
+dayjs.extend(advancedFormat);
 
 @Pipe({name: 'fancyDeadline'})
 export class FancyDeadlinePipe implements PipeTransform {
@@ -31,14 +34,30 @@ export class FancyDeadlinePipe implements PipeTransform {
 
 @Pipe({name: 'deadline'})
 export class DeadlinePipe implements PipeTransform {
-  transform(date: string, stage: string): string {
+  transform(date: string, themePhase: ThemePhase): string {
     let now = new Date();
     let deadline = new Date(date);
 
     if (deadline > now) {
-      return `${stage} until ${dayjs(date).format('MMMM Do')}`;
+      switch(themePhase) {
+        case ThemePhase.NOMINATE:
+          return `Nominate until ${dayjs(date).format('MMMM Do')}`;
+        case ThemePhase.VOTE:
+          return `Vote until ${dayjs(date).format('MMMM Do')}`;
+        case ThemePhase.READ:
+          return `Read until ${dayjs(date).format('MMMM Do')} at ${dayjs(date).format('LT')}`;
+      }
     } else {
-      return `${stage} ended on ${dayjs(date).format('MMMM Do')}`;
+      let formattedPhase = '';
+      switch(themePhase) {
+        case ThemePhase.NOMINATE:
+          return `Nominating ended on ${dayjs(date).format('MMMM Do')}`;
+        case ThemePhase.VOTE:
+          formattedPhase = 'Voting';
+          return `Voting ended on ${dayjs(date).format('MMMM Do')}`;
+        case ThemePhase.READ:
+          return `Reading ended on ${dayjs(date).format('MMMM Do')} at ${dayjs(date).format('LT')}`;
+      }
     }
   }
 }

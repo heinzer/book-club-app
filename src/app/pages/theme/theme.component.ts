@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
 import {ThemeModalComponent} from '../clubs-list/club/theme-modal/theme-modal.component';
 import {ClubService} from '../../services/club.service';
+import {ThemePhase} from './deadline/deadline.component';
 
 @Component({
   selector: 'app-theme',
@@ -19,6 +20,8 @@ export class ThemeComponent implements OnInit {
   clubId: number;
   members: IUserMembership[];
   nominations = [];
+
+  ThemePhase = ThemePhase;
 
   constructor(public auth: AuthService,
               public api: ApiService,

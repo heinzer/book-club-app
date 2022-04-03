@@ -17,13 +17,13 @@ export class DeadlineComponent {
     return this._date;
   }
 
-  private _stage: string;
+  private _stage: ThemePhase;
   @Input()
-  set stage(stage: string) {
+  set stage(stage: ThemePhase) {
     this._stage = stage;
   }
 
-  get stage(): string {
+  get stage(): ThemePhase {
     return this._stage;
   }
 
@@ -38,4 +38,10 @@ export class DeadlineComponent {
   }
 
   constructor() {    }
+}
+
+export enum ThemePhase {
+  NOMINATE,
+  VOTE,
+  READ
 }

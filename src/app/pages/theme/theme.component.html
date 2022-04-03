@@ -9,9 +9,9 @@
       <div class="row">
         <p *ngIf="theme.description">{{ theme.description }}</p>
         <div class="deadlines">
-          <app-deadline [date]="theme.nominationDeadline" [percentage]="theme.startDate | deadlinePercentage : theme.nominationDeadline" stage="Nominate"></app-deadline>
-          <app-deadline [date]="theme.votingDeadline" [percentage]="theme.nominationDeadline | deadlinePercentage : theme.votingDeadline" stage="Vote"></app-deadline>
-          <app-deadline [date]="theme.readingDeadline" [percentage]="theme.votingDeadline | deadlinePercentage : theme.readingDeadline" stage="Read"></app-deadline>
+          <app-deadline [date]="theme.nominationDeadline" [percentage]="theme.startDate | deadlinePercentage : theme.nominationDeadline" [stage]="ThemePhase.NOMINATE"></app-deadline>
+          <app-deadline [date]="theme.votingDeadline" [percentage]="theme.nominationDeadline | deadlinePercentage : theme.votingDeadline" [stage]="ThemePhase.VOTE"></app-deadline>
+          <app-deadline [date]="theme.readingDeadline" [percentage]="theme.votingDeadline | deadlinePercentage : theme.readingDeadline" [stage]="ThemePhase.READ"></app-deadline>
         </div>
       </div>
 

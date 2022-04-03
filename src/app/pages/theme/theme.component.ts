@@ -1,10 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { ITheme } from '../../models/data-models';
+import {ITheme, IUserMembership} from '../../models/data-models';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
 import {ThemeModalComponent} from '../clubs-list/club/theme-modal/theme-modal.component';
+import {ClubService} from '../../services/club.service';
 
 @Component({
   selector: 'app-theme',
@@ -15,11 +16,14 @@ export class ThemeComponent implements OnInit {
   @ViewChild(ThemeModalComponent) themeModalComponent: ThemeModalComponent;
   theme: ITheme;
   clubId: number;
+  members: IUserMembership[];
+  nominations = [];
 
   constructor(public auth: AuthService,
               public api: ApiService,
               private router: Router, private route: ActivatedRoute,
-              private themeService: ThemeService) {}
+              private themeService: ThemeService,
+              private clubService: ClubService) {}
 
   ngOnInit(): void {
     // check that the user is authenticated
@@ -29,6 +33,7 @@ export class ThemeComponent implements OnInit {
       this.route.params.subscribe(params => {
         this.clubId = +params['clubId'];
         this.themeService.getTheme(this.clubId).subscribe(theme => this.theme = theme);
+        this.clubService.getMembershipsForClub(this.clubId).subscribe(members => this.members = members);
       });
     }
   }

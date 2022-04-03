@@ -14,6 +14,30 @@
           <app-deadline [date]="theme.readingDeadline" [percentage]="theme.votingDeadline | deadlinePercentage : theme.readingDeadline" stage="Read"></app-deadline>
         </div>
       </div>
+
+      <div class="panel-with-sidebar">
+        <div class="left">
+          <h4>Nominated Books</h4>
+<!--          <ng-container *ngFor="let theme of openThemes">
+            <app-theme-summary [theme]="theme" [clubId]="id"></app-theme-summary>
+          </ng-container>-->
+          <app-dotted-container *ngIf="nominations?.length">
+            <div class="no-themes-container">
+              <p>No nominations have been added</p>
+              <button class="secondary-button">+ Add Nomination</button>
+            </div>
+          </app-dotted-container>
+        </div>
+
+        <div class="right" *ngIf="members && members.length > 0">
+          <div class="members">
+            <h4>Members</h4>
+            <ng-container *ngFor="let member of members">
+              <h6>{{ member.firstName }} {{ member.lastName ? member.lastName[0] : '' }} {{ member.isAdmin ? '(admin)' : '' }}</h6>
+            </ng-container>
+          </div>
+        </div>
+      </div>
     </ng-container>
   </div>
 </app-base-page>

@@ -43,7 +43,7 @@ export class ClubComponent implements OnInit {
         this.clubService.getClub(this.id).subscribe(club => this.club = club);
         this.clubService.getMembershipsForClub(this.id).subscribe(members => this.members = members);
         this.fetchThemes();
-      })
+      });
     }
   }
 

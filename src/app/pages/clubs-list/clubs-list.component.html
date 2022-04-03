@@ -1,8 +1,10 @@
 <app-base-page>
-  <app-page-header [label]="'My Clubs'">
-    <app-icon-button [icon]="'plus-circle'"
-                     (click)="clubModalComponent.createClub()"></app-icon-button>
-  </app-page-header>
+  <app-page-breadcrumbs>
+    <app-breadcrumb [label]="'My Clubs'">
+      <app-icon-button [icon]="'plus-circle'"
+                       (click)="clubModalComponent.createClub()"></app-icon-button>
+    </app-breadcrumb>
+  </app-page-breadcrumbs>
 
   <ng-container *ngFor="let club of clubs">
     <app-club-summary [club]="club"></app-club-summary>

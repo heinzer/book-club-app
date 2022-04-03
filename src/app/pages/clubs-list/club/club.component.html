@@ -1,9 +1,11 @@
 <app-base-page>
-  <app-page-header [label]="club.name">
-    <app-icon-button *ngIf="api.isCurrentUserAdminOfClub(id)"
-                     [icon]="'pencil'"
-                     (click)="clubModalComponent.editClub(club)"></app-icon-button>
-  </app-page-header>
+  <app-page-breadcrumbs>
+    <app-breadcrumb  [label]="club.name">
+      <app-icon-button *ngIf="api.isCurrentUserAdminOfClub(id)"
+                       [icon]="'pencil'"
+                       (click)="clubModalComponent.editClub(club)"></app-icon-button>
+    </app-breadcrumb>
+  </app-page-breadcrumbs>
   <div class="panel-with-sidebar">
     <div class="left">
       <h4>

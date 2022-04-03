@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ITheme, IUserMembership} from '../../models/data-models';
+import {IClub, ITheme, IUserMembership} from '../../models/data-models';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -16,6 +16,7 @@ import {ThemePhase} from './deadline/deadline.component';
 export class ThemeComponent implements OnInit {
   @ViewChild(ThemeModalComponent) themeModalComponent: ThemeModalComponent;
   theme: ITheme;
+  club: IClub;
   themeId: number;
   clubId: number;
   members: IUserMembership[];
@@ -37,6 +38,7 @@ export class ThemeComponent implements OnInit {
       this.route.params.subscribe(params => {
         this.clubId = +params['clubId'];
         this.themeId = +params['id'];
+        this.clubService.getClub(this.clubId).subscribe(club => this.club = club);
         this.themeService.getTheme(this.themeId).subscribe(theme => this.theme = theme);
         this.clubService.getMembershipsForClub(this.clubId).subscribe(members => this.members = members);
       });

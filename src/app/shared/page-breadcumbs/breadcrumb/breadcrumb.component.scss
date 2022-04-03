@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  align-items: center;
+  width: auto;
+}
+
+h3 {
+  a {
+    color: var(--olive);
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+:host ::ng-deep app-icon-button {
+  margin-bottom: 0.5rem;
+}

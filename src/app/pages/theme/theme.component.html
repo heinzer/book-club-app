@@ -1,11 +1,15 @@
 <app-base-page>
   <div class="theme-details-component">
     <ng-container *ngIf="theme">
-      <app-page-header [label]="theme.name">
-        <app-icon-button *ngIf="api.isCurrentUserAdminOfClub(clubId)"
-                         [icon]="'pencil'"
-                         (click)="themeModalComponent.editTheme(theme)"></app-icon-button>
-      </app-page-header>
+      <app-page-breadcrumbs>
+        <app-breadcrumb [label]="club.name" route="{{'/clubs/' + club.id}}"></app-breadcrumb>
+        <fa-icon [icon]="'chevron-right'"></fa-icon>
+        <app-breadcrumb [label]="theme.name">
+          <app-icon-button *ngIf="api.isCurrentUserAdminOfClub(clubId)"
+                           [icon]="'pencil'"
+                           (click)="themeModalComponent.editTheme(theme)"></app-icon-button>
+        </app-breadcrumb>
+      </app-page-breadcrumbs>
       <div class="row">
         <p *ngIf="theme.description">{{ theme.description }}</p>
         <div class="deadlines">

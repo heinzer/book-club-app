@@ -8,16 +8,19 @@ import {DottedContainerComponent} from './containers/dotted-container/dotted-con
 import {BasePageComponent} from './base-page/base-page.component';
 import {SolidContainerComponent} from './containers/solid-container/solid-container.component';
 import {SolidContainerWithHoverComponent} from './containers/solid-container-with-hover/solid-container-with-hover.component';
-import {PageHeaderComponent} from './page-header/page-header.component';
+import {PageBreadcrumbsComponent} from './page-breadcumbs/page-breadcrumbs.component';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {faPencil, faPlusCircle, faUsers} from '@fortawesome/free-solid-svg-icons';
+import {faChevronRight, faPencil, faPlusCircle, faUsers} from '@fortawesome/free-solid-svg-icons';
 import {IconButtonComponent} from './icon-button/icon-button.component';
+import {BreadcrumbComponent} from './page-breadcumbs/breadcrumb/breadcrumb.component';
+import {RouterModule} from '@angular/router';
 
 export const components = [
   BasePageComponent,
+  BreadcrumbComponent,
   DottedContainerComponent,
   IconButtonComponent,
-  PageHeaderComponent,
+  PageBreadcrumbsComponent,
   PasswordInputComponent,
   SolidContainerComponent,
   SolidContainerWithHoverComponent
@@ -37,7 +40,8 @@ export const pipes = [
   imports: [
     BrowserModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    RouterModule
   ],
   exports: [
     ...components,
@@ -49,6 +53,6 @@ export const pipes = [
 export class SharedModule {
   constructor(library: FaIconLibrary) {
     // Add an icon to the library for convenient access in other components
-    library.addIcons(faPlusCircle, faUsers, faPencil);
+    library.addIcons(faPlusCircle, faUsers, faPencil, faChevronRight);
   }
 }

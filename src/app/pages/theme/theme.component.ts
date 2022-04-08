@@ -65,7 +65,7 @@ export class ThemeComponent implements OnInit {
     timer = setTimeout(() => { 
       console.log('terms:',this.searchTerms)
       // search
-      let cleanedSearchTerms = this.searchTerms.replace(' ','+');
+      let cleanedSearchTerms = encodeURI(this.searchTerms.replace(' ','+').trim());
       this.openLibraryService.searchForBooks(cleanedSearchTerms)
       .subscribe(results => {
         this.results = results;

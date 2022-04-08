@@ -14,7 +14,7 @@ export class OpenLibraryService {
   // assumes the search terms are already prepared
   searchForBooks(searchTerms): Observable<any[]> {
     let params = "&fields=key,type,title,cover_i,first_publish_year,number_of_pages_median,author_name,subject,&limit=10";
-    return this.http.get<any>(`http://openlibrary.org/search.json?q=${searchTerms}${params}`);
+    return this.http.get<any>(`https://openlibrary.org/search.json?q=${searchTerms}${params}`);
   }
 
   getCover(coverId): Observable<any[]> {

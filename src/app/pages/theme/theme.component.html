@@ -12,25 +12,42 @@
       </app-page-breadcrumbs>
       <div class="row">
         <p *ngIf="theme.description">{{ theme.description }}</p>
-        <div class="deadlines">
+        <div class="deadlines" *ngIf="!shouldShowNominationSection">
           <app-deadline [date]="theme.nominationDeadline" [percentage]="theme.startDate | deadlinePercentage : theme.nominationDeadline" [stage]="ThemePhase.NOMINATE"></app-deadline>
           <app-deadline [date]="theme.votingDeadline" [percentage]="theme.nominationDeadline | deadlinePercentage : theme.votingDeadline" [stage]="ThemePhase.VOTE"></app-deadline>
           <app-deadline [date]="theme.readingDeadline" [percentage]="theme.votingDeadline | deadlinePercentage : theme.readingDeadline" [stage]="ThemePhase.READ"></app-deadline>
         </div>
       </div>
 
-      <div class="panel-with-sidebar">
+      <div class="panel-with-sidebar" *ngIf="!shouldShowNominationSection">
         <div class="left">
-          <h4>Nominated Books</h4>
-<!--          <ng-container *ngFor="let theme of openThemes">
-            <app-theme-summary [theme]="theme" [clubId]="id"></app-theme-summary>
-          </ng-container>-->
-          <app-dotted-container *ngIf="!nominations?.length">
-            <div class="no-themes-container">
-              <p>No nominations have been added</p>
-              <button class="secondary-button">+ Add Nomination</button>
-            </div>
-          </app-dotted-container>
+          <h4>My Nominations</h4>
+          <div class="nomination-container">
+            <app-dotted-container>
+              <div class="no-themes-container">
+                <button class="minor-button" (click)="loadNominationComponent()">
+                  <fa-icon [icon]="'plus-circle'"></fa-icon>
+                </button>
+              </div>
+            </app-dotted-container>
+            <app-dotted-container>
+              <div class="no-themes-container">
+                <button class="minor-button" (click)="loadNominationComponent()">
+                  <fa-icon [icon]="'plus-circle'"></fa-icon>
+                </button>
+              </div>
+            </app-dotted-container>
+            <app-dotted-container>
+              <div class="no-themes-container">
+                <button class="minor-button" (click)="loadNominationComponent()">
+                  <fa-icon [icon]="'plus-circle'"></fa-icon>
+                </button>
+              </div>
+            </app-dotted-container>
+          </div>
+
+          <h4 class="margin-top">Nominated Books</h4>
+          <p *ngIf="nominations.length <= 0">No nominations yet.</p>
         </div>
 
         <div class="right" *ngIf="members && members.length > 0">
@@ -42,6 +59,30 @@
           </div>
         </div>
       </div>
+
+      <div class="panel-no-sidebar" *ngIf="shouldShowNominationSection">
+        <input type="text" class="search-bar" placeholder="Search for a book by title or author" (keyup)="search()" [(ngModel)]="searchTerms">
+        <div class="search-results" *ngIf="results">
+          <div class="result" *ngFor='let result of results["docs"]'>
+            <img class="book-cover" *ngIf="result.cover_i" [src]="buildImg(result)">
+            <img class="book-cover bordered" *ngIf="!result.cover_i">
+            <div class="result-contents">
+              <div class="left-content">
+                <b>{{result.title}}</b>
+                <span>by {{result.author_name[0]}}</span>
+
+                <span>First published in {{result.first_publish_year}}</span>
+                <span>~{{result.number_of_pages_median}} pages</span>
+              </div>
+              <div class="right-content">
+                <!-- TODO links to goodreads, amazon, etc -->
+                <button class="result-button nominate" (click)="nominateBook(result)">Nominate this book</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </ng-container>
   </div>
 </app-base-page>

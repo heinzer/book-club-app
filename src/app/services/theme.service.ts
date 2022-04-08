@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ITheme } from '../models/data-models';
+import { ITheme, IBook, NominateBookRequest } from '../models/data-models';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -31,5 +31,18 @@ export class ThemeService {
 
   deleteTheme(id: number): Observable<void> {
     return this.http.delete<void>(this.themeUrl(id));
+  }
+
+  // Book Stuff
+  nominateBook(themeId: number, nominatorId: number, workId: string, triggerWarnings: string): Observable<IBook> {
+    return this.http.post<IBook>(`${this.themeBaseUrl}/${themeId}/books`, 
+      JSON.stringify({
+        themeId: themeId,
+        nominatorId: nominatorId,
+        workId: workId,
+        isbn: "isbn",
+        triggerWarnings: triggerWarnings
+      })
+    );
   }
 }

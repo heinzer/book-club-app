@@ -83,6 +83,19 @@ h3 {
   }
 }
 
+.minor-button {
+  border-width: 0px;
+  background-color: white;
+  color: var(--olive);
+  width: inherit;
+  padding: 10px;
+  font-family: RobotoSlab-Regular;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
 .main-button.inline {
   background-color: transparent;
   border: none;
@@ -123,4 +136,8 @@ select {
     color: var(--lightgray);
     font-size: 14px;
   }
+}
+
+.margin-top {
+  margin-top: 20px;
 }

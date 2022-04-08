@@ -7,6 +7,7 @@ import { ThemeService } from '../../services/theme.service';
 import {ThemeModalComponent} from '../clubs-list/club/theme-modal/theme-modal.component';
 import {ClubService} from '../../services/club.service';
 import {ThemePhase} from './deadline/deadline.component';
+import { OpenLibraryService } from '../../services/openlibrary.service';
 
 @Component({
   selector: 'app-theme',
@@ -22,13 +23,18 @@ export class ThemeComponent implements OnInit {
   members: IUserMembership[];
   nominations = [];
 
+  shouldShowNominationSection: boolean = false;
+  searchTerms: string = '';
+  results: object;
+
   ThemePhase = ThemePhase;
 
   constructor(public auth: AuthService,
               public api: ApiService,
               private router: Router, private route: ActivatedRoute,
               private themeService: ThemeService,
-              private clubService: ClubService) {}
+              private clubService: ClubService,
+              private openLibraryService: OpenLibraryService) {}
 
   ngOnInit(): void {
     // check that the user is authenticated
@@ -47,5 +53,35 @@ export class ThemeComponent implements OnInit {
 
   refreshWithUpdatedTheme(theme: ITheme): void {
     this.theme = theme;
+  }
+
+  loadNominationComponent() {
+    this.shouldShowNominationSection = true;
+  }
+
+  search() {
+    let timer;
+    clearTimeout(timer);
+    timer = setTimeout(() => { 
+      console.log('terms:',this.searchTerms)
+      // search
+      let cleanedSearchTerms = this.searchTerms.replace(' ','+');
+      this.openLibraryService.searchForBooks(cleanedSearchTerms)
+      .subscribe(results => {
+        this.results = results;
+        console.log('results:',results)
+      });
+      // this.results = this.openLibraryService.mockSearchBooks();
+    }, 500);
+  };
+
+  buildImg(result) {
+    return `https://covers.openlibrary.org/b/id/${result.cover_i}-M.jpg`;
+  }
+
+  nominateBook(result) {
+    let workId = result.key.replace('/works/','');
+    this.themeService.nominateBook(this.themeId, this.api.currentUser.id, workId, "trigger warning")
+    .subscribe(book => console.log('book:',book));
   }
 }

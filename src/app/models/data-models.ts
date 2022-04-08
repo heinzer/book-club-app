@@ -43,3 +43,31 @@ export enum ThemeStatus {
   OPEN = 'OPEN',
   CLOSED = 'CLOSED',
 }
+
+export interface NominateBookRequest {
+  themeId: string;
+  nominatorId: string;
+  isbn: string;
+  workId: string;
+  triggerWarnings: string;
+}
+
+export interface IBook {
+  externalBookData: any;
+  nomination: INominationEntity;
+  book: IBookEntity;
+}
+
+export interface INominationEntity {
+  id: number;
+  themeId: string;
+  bookId: number;
+  nominatorId: string;
+}
+
+export interface IBookEntity {
+  id: number;
+  isbn: string;
+  workId: string;
+  triggerWarnings: string;
+}

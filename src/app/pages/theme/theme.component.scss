@@ -65,3 +65,47 @@
   }
 }
 
+.nomination-container {
+  display: flex;
+  gap: 20px;
+}
+
+
+// TODO this should be pulled out elsewhere
+.search-bar {
+  width: 100%;
+}
+
+.search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.left-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.result {
+  display: flex;
+  gap: 10px;
+  .result-contents {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+.book-cover {
+  vertical-align: middle;
+  width: 90px;
+
+  &.bordered {
+    border: 1px solid lightgray;
+    width: 90px;
+    height: 132px;
+  }
+}

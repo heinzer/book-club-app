@@ -10,7 +10,7 @@ import {SolidContainerComponent} from './containers/solid-container/solid-contai
 import {SolidContainerWithHoverComponent} from './containers/solid-container-with-hover/solid-container-with-hover.component';
 import {PageBreadcrumbsComponent} from './page-breadcumbs/page-breadcrumbs.component';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {faChevronRight, faPencil, faPlusCircle, faUsers} from '@fortawesome/free-solid-svg-icons';
+import {faChevronRight, faPencil, faPlusCircle, faUserCircle, faUsers} from '@fortawesome/free-solid-svg-icons';
 import {IconButtonComponent} from './icon-button/icon-button.component';
 import {BreadcrumbComponent} from './page-breadcumbs/breadcrumb/breadcrumb.component';
 import {RouterModule} from '@angular/router';
@@ -53,6 +53,6 @@ export const pipes = [
 export class SharedModule {
   constructor(library: FaIconLibrary) {
     // Add an icon to the library for convenient access in other components
-    library.addIcons(faPlusCircle, faUsers, faPencil, faChevronRight);
+    library.addIcons(faPlusCircle, faUsers, faPencil, faChevronRight, faUserCircle);
   }
 }

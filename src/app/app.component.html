@@ -6,7 +6,7 @@
   </div>
   <div class="right">
     <a class="nav-item nav-link" routerLink="/login" *ngIf="!api.currentUser">Login</a>
-    <a class="nav-item nav-link" routerLink="/profile" *ngIf="api.currentUser"><span class="fas fa-user-circle"></span></a>
+    <a class="nav-item nav-link" routerLink="/profile" *ngIf="api.currentUser"><fa-icon [icon]="'user-circle'"></fa-icon></a>
   </div>
 </nav>
 

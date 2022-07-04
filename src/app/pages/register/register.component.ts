@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   email: string = "";
   password: string = "";
   error: any = "";
+  loading = false;
 
   constructor(public auth: AuthService,
               private router: Router) { }
@@ -24,6 +25,8 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser() {
+    this.closeAlert();
+    this.loading = true;
     this.auth.register(this.firstName, this.email, this.password)
       .pipe(
         mergeMap(() => this.auth.getCurrentUser()),
@@ -31,8 +34,16 @@ export class RegisterComponent implements OnInit {
       )
       .subscribe(
         response => this.router.navigate(['/clubs']),
-        error => this.error = error
+        error => {
+          this.loading = false
+          this.error = error;
+          console.log("Error: ", error);
+        }
       );
+  }
+
+  closeAlert(): void {
+    this.error = "";
   }
 
   login() {

@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   email: string = "";
   password: string = "";
   error: any = "";
+  loading = false;
 
   constructor(public auth: AuthService, public api: ApiService, private router: Router) {
   }
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
 
   tryLogin() {
     this.closeAlert();
+    this.loading = true;
     this.auth.login(this.email, this.password)
       .pipe(
         mergeMap(() => this.auth.getCurrentUser()),
@@ -33,9 +35,10 @@ export class LoginComponent implements OnInit {
       .subscribe(r => {
           this.router.navigate(['/clubs']);
         },
-        e => {
-          this.error = e;
-          console.log("Error: ", e);
+        error => {
+          this.loading = false;
+          this.error = error;
+          console.log("Error: ", error);
         });
   }
 

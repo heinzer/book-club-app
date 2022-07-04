@@ -8,12 +8,12 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
   </div>
   <div class="input-pair">
-    <input type="text" placeholder="Email" [(ngModel)]="email" name="email">
+    <input type="text" placeholder="Email" [disabled]="loading" [(ngModel)]="email" name="email">
   </div>
 
-  <app-password-input [(password)]="password"></app-password-input>
+  <app-password-input [disabled]="loading" [(password)]="password"></app-password-input>
 
-  <button class="main-button login" type="submit">Submit</button>
+  <button class="main-button login" type="submit" [disabled]="!email || !password || loading">Submit</button>
 
   <div class="register">
     Not a member? <button class="main-button inline" (click)="register()">Register here</button>

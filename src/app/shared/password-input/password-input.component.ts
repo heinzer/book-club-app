@@ -7,6 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class PasswordInputComponent {
   @Input() password: string = "";
+  @Input() disabled: boolean = false;
   @Output() passwordChange = new EventEmitter<string>();
 
   hidePassword: boolean = true;

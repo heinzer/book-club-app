@@ -67,6 +67,14 @@ h3 {
   &:hover {
     opacity: 0.6;
   }
+  &:disabled {
+    cursor: auto;
+    background-color: var(--lightgray);
+    border-color: var(--lightgray);
+    &:hover {
+      opacity: 1.0;
+    }
+  }
 }
 
 .secondary-button {

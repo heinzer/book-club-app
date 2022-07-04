@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   tryLogin() {
+    this.closeAlert();
     this.auth.login(this.email, this.password)
       .pipe(
         mergeMap(() => this.auth.getCurrentUser()),
@@ -34,7 +35,12 @@ export class LoginComponent implements OnInit {
         },
         e => {
           this.error = e;
+          console.log("Error: ", e);
         });
+  }
+
+  closeAlert(): void {
+    this.error = "";
   }
 
   register() {

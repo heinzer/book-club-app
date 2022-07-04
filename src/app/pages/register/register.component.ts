@@ -15,7 +15,6 @@ export class RegisterComponent implements OnInit {
   firstName: string = "";
   email: string = "";
   password: string = "";
-  hidePassword: boolean = true;
   error: any = "";
 
   constructor(public auth: AuthService,

@@ -1,5 +1,5 @@
 import { HttpInterceptor, HttpRequest, HttpEvent, HttpErrorResponse, HttpResponse, HttpHandler } from '@angular/common/http/';
-import { ApiService } from './api.service';
+import { CurrentSessionService } from './current-session.service';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
@@ -9,7 +9,7 @@ import { debounceTime } from 'rxjs/operators';
 
 @Injectable()
 export class APIHttpInterceptor implements HttpInterceptor {
-  constructor(public api: ApiService) {
+  constructor(public session: CurrentSessionService) {
 
   }
 
@@ -18,7 +18,7 @@ export class APIHttpInterceptor implements HttpInterceptor {
       setHeaders: {
         'Content-Type' : 'application/json; charset=utf-8',
         'Accept'       : 'application/json',
-        'Authorization': `Bearer ${this.api.authToken()}`,
+        'Authorization': `Bearer ${this.session.getAuthToken()}`,
       },
     });
 

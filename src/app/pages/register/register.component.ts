@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
-import {ApiService} from '../../services/api.service';
+import {CurrentSessionService} from '../../services/current-session.service';
 import {mergeMap, tap} from 'rxjs/operators';
 import {LoginResponse} from '../../models/data-models';
 import {UserService} from '../../services/user.service';

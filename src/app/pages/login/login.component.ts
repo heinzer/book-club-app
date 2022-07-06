@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../services/auth.service';
-import {ApiService} from '../../services/api.service';
+import {AuthService} from '../../auth/auth.service';
+import {CurrentSessionService} from '../../services/current-session.service';
 import {Router} from '@angular/router';
 import {mergeMap} from 'rxjs/operators';
 
@@ -15,11 +15,11 @@ export class LoginComponent implements OnInit {
   error: any = "";
   loading = false;
 
-  constructor(public auth: AuthService, public api: ApiService, private router: Router) {
+  constructor(public auth: AuthService, public session: CurrentSessionService, private router: Router) {
   }
 
   ngOnInit(): void {
-    if (this.api.currentUser) {
+    if (this.session.currentUser) {
       this.router.navigate(['/clubs']);
     }
   }

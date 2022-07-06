@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark">
   <div class="left">
     <a class="nav-item nav-link" href="">BOOKWORMS</a>
-    <a class="nav-item nav-link" routerLink="/clubs" *ngIf="api.currentUser">Clubs</a>
+    <a class="nav-item nav-link" routerLink="/clubs" *ngIf="session.currentUser">Clubs</a>
     <a class="nav-item nav-link" routerLink="/stylepreview">Debug: Style preview</a>
   </div>
   <div class="right">
-    <a class="nav-item nav-link" routerLink="/login" *ngIf="!api.currentUser">Login</a>
-    <a class="nav-item nav-link" routerLink="/profile" *ngIf="api.currentUser"><fa-icon [icon]="'user-circle'"></fa-icon></a>
+    <a class="nav-item nav-link" routerLink="/login" *ngIf="!session.currentUser">Login</a>
+    <a class="nav-item nav-link" routerLink="/profile" *ngIf="session.currentUser"><fa-icon [icon]="'user-circle'"></fa-icon></a>
   </div>
 </nav>
 

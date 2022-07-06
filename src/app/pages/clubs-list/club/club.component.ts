@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {IClub, ITheme, IUser, IUserMembership, ThemeStatus} from '../../../models/data-models';
-import { ApiService } from '../../../services/api.service';
-import { AuthService } from '../../../services/auth.service';
+import { CurrentSessionService } from '../../../services/current-session.service';
+import { AuthService } from '../../../auth/auth.service';
 import { ClubService } from '../../../services/club.service';
 import { ThemeService } from '../../../services/theme.service';
 import { UserService } from '../../../services/user.service';
@@ -27,24 +27,19 @@ export class ClubComponent implements OnInit {
   openThemes: ITheme[];
   closedThemes: ITheme[];
 
-  constructor(public api: ApiService,
+  constructor(public session: CurrentSessionService,
               private clubService: ClubService,
               private themeService: ThemeService,
               private router: Router,
               private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // check that the user is authenticated
-    if (!this.api.currentUser) {
-      this.router.navigate(['/login']);
-    } else {
-      this.route.params.subscribe(params => {
-        this.id = +params['clubId']
-        this.clubService.getClub(this.id).subscribe(club => this.club = club);
-        this.clubService.getMembershipsForClub(this.id).subscribe(members => this.members = members);
-        this.fetchThemes();
-      });
-    }
+    this.route.params.subscribe(params => {
+      this.id = +params['clubId']
+      this.clubService.getClub(this.id).subscribe(club => this.club = club);
+      this.clubService.getMembershipsForClub(this.id).subscribe(members => this.members = members);
+      this.fetchThemes();
+    });
   }
 
   fetchThemes() {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiService } from './services/api.service';
-import { AuthService } from './services/auth.service';
+import { CurrentSessionService } from './services/current-session.service';
+import { AuthService } from './auth/auth.service';
 import { Router } from '@angular/router';
 import {mergeMap} from 'rxjs/operators';
 
@@ -12,20 +12,14 @@ import {mergeMap} from 'rxjs/operators';
 export class AppComponent {
   title = 'book-club-app';
 
-  constructor(public api: ApiService, public auth: AuthService, private router: Router) {
-    const possibleToken = this.api.loadToken();
+  constructor(public session: CurrentSessionService, public auth: AuthService) {
+    const possibleToken = this.session.getAuthToken();
     if (possibleToken) {
       this.auth.getCurrentUser()
         .pipe(
           mergeMap(() => this.auth.getCurrentUserMemberships())
         )
-        .subscribe(
-          user => {
-            this.router.navigate(['/clubs']);
-          },
-          err => {
-            this.router.navigate(['/login']);
-          });
+        .subscribe();
     }
   }
 }

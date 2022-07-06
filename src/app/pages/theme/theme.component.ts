@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IClub, ITheme, IUserMembership} from '../../models/data-models';
-import { AuthService } from '../../services/auth.service';
-import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../auth/auth.service';
+import { CurrentSessionService } from '../../services/current-session.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
 import {ThemeModalComponent} from '../clubs-list/club/theme-modal/theme-modal.component';
@@ -30,25 +30,20 @@ export class ThemeComponent implements OnInit {
   ThemePhase = ThemePhase;
 
   constructor(public auth: AuthService,
-              public api: ApiService,
+              public session: CurrentSessionService,
               private router: Router, private route: ActivatedRoute,
               private themeService: ThemeService,
               private clubService: ClubService,
               private openLibraryService: OpenLibraryService) {}
 
   ngOnInit(): void {
-    // check that the user is authenticated
-    if (!this.api.currentUser) {
-      this.router.navigate(['/login']);
-    } else {
-      this.route.params.subscribe(params => {
-        this.clubId = +params['clubId'];
-        this.themeId = +params['id'];
-        this.clubService.getClub(this.clubId).subscribe(club => this.club = club);
-        this.themeService.getTheme(this.themeId).subscribe(theme => this.theme = theme);
-        this.clubService.getMembershipsForClub(this.clubId).subscribe(members => this.members = members);
-      });
-    }
+    this.route.params.subscribe(params => {
+      this.clubId = +params['clubId'];
+      this.themeId = +params['id'];
+      this.clubService.getClub(this.clubId).subscribe(club => this.club = club);
+      this.themeService.getTheme(this.themeId).subscribe(theme => this.theme = theme);
+      this.clubService.getMembershipsForClub(this.clubId).subscribe(members => this.members = members);
+    });
   }
 
   refreshWithUpdatedTheme(theme: ITheme): void {
@@ -62,7 +57,7 @@ export class ThemeComponent implements OnInit {
   search() {
     let timer;
     clearTimeout(timer);
-    timer = setTimeout(() => { 
+    timer = setTimeout(() => {
       console.log('terms:',this.searchTerms)
       // search
       let cleanedSearchTerms = encodeURI(this.searchTerms.replace(' ','+').trim());
@@ -81,7 +76,7 @@ export class ThemeComponent implements OnInit {
 
   nominateBook(result) {
     let workId = result.key.replace('/works/','');
-    this.themeService.nominateBook(this.themeId, this.api.currentUser.id, workId, "trigger warning")
+    this.themeService.nominateBook(this.themeId, this.session.currentUser.id, workId, "trigger warning")
     .subscribe(book => console.log('book:',book));
   }
 }

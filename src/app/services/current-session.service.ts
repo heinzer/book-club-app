@@ -4,7 +4,7 @@ import {IClubMembership, IUser} from '../models/data-models';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class CurrentSessionService {
   public baseUrl = "https://book-club-app-server.herokuapp.com";
   public currentUser?: IUser;
   public currentUserMemberships: IClubMembership[] = [];
@@ -28,16 +28,22 @@ export class ApiService {
   }
 
   /* Token stuff */
-  authToken() {
-    return this.token;
-  }
+  getAuthToken() {
+    if (this.token) { // token has already been loaded
+      return this.token;
+    }
 
-  loadToken() {
     let possibleToken = this.getStoredItem(this.storageKeys.TOKEN);
     if (possibleToken) {
       this.token = possibleToken;
     }
     return possibleToken;
+  }
+
+  saveAuthToken(authToken :string) {
+    console.log(authToken)
+    this.saveStoredItem(this.storageKeys.TOKEN, authToken);
+    this.token = authToken;
   }
 
   saveCurrentUser(currentUser: IUser): void {
@@ -50,9 +56,8 @@ export class ApiService {
     this.currentUserMemberships = currentUserMemberships
   }
 
-  saveAuthToken(authToken:string) {
-    this.saveStoredItem(this.storageKeys.TOKEN, authToken);
-    this.token = authToken;
+  isCurrentUserAdminOfClub(clubId: number): boolean {
+    return this.currentUserMemberships.find(clubMembership => clubMembership.id === clubId)?.isAdmin;
   }
 
   /* Accessing local storage functions */
@@ -66,9 +71,5 @@ export class ApiService {
 
   removeStoredItem(key:string) {
     return this.storage.removeItem(key);
-  }
-
-  isCurrentUserAdminOfClub(clubId: number): boolean {
-    return this.currentUserMemberships.find(clubMembership => clubMembership.id === clubId)?.isAdmin;
   }
 }

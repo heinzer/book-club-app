@@ -2,15 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
 import {IClub, ITheme, IUser, IUserMembership} from '../models/data-models';
-import { ApiService } from './api.service';
+import { CurrentSessionService } from './current-session.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClubService {
-  private readonly clubBaseUrl = `${this.api.baseUrl}/clubs`;
+  private readonly clubBaseUrl = `${this.session.baseUrl}/clubs`;
   private readonly clubUrl = (clubId: number) => `${this.clubBaseUrl}/${clubId}`;
-  constructor(public http: HttpClient, private api: ApiService) {}
+  constructor(public http: HttpClient, private session: CurrentSessionService) {}
 
   getClubs(): Observable<IClub[]>{
     return this.http.get<IClub[]>(`${this.clubBaseUrl}`);
@@ -33,7 +33,7 @@ export class ClubService {
   }
 
   createClub(club: IClub): Observable<IClub> {
-    return this.http.post<IClub>(this.clubBaseUrl, { adminId: this.api.currentUser?.id, ...club });
+    return this.http.post<IClub>(this.clubBaseUrl, { adminId: this.session.currentUser?.id, ...club });
   }
 
   editClub(club: IClub): Observable<IClub> {

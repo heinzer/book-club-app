@@ -5,7 +5,7 @@
         <app-breadcrumb [label]="club.name" route="{{'/clubs/' + club.id}}"></app-breadcrumb>
         <fa-icon [icon]="'chevron-right'"></fa-icon>
         <app-breadcrumb [label]="theme.name">
-          <app-icon-button *ngIf="api.isCurrentUserAdminOfClub(clubId)"
+          <app-icon-button *ngIf="session.isCurrentUserAdminOfClub(clubId)"
                            [icon]="'pencil'"
                            (click)="themeModalComponent.editTheme(theme)"></app-icon-button>
         </app-breadcrumb>

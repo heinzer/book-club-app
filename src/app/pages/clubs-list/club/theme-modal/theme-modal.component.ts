@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ThemeService} from '../../../../services/theme.service';
 import {ITheme, ThemeStatus} from '../../../../models/data-models';
-import {ApiService} from '../../../../services/api.service';
+import {CurrentSessionService} from '../../../../services/current-session.service';
 import {ClubService} from '../../../../services/club.service';
 import { formatDate } from '@angular/common';
 
@@ -23,7 +23,7 @@ export class ThemeModalComponent {
   ModalResults = ModalResults;
   model: NgbDateStruct;
 
-  constructor(private api: ApiService,
+  constructor(private session: CurrentSessionService,
               private clubService: ClubService,
               private router: Router,
               private route: ActivatedRoute,
@@ -79,7 +79,7 @@ export class ThemeModalComponent {
         if (result === ModalResults.SAVE) {
           let newTheme: ITheme = {
             clubId: clubId,
-            nominatorId: this.api.currentUser?.id,
+            nominatorId: this.session.currentUser?.id,
             name: this.themeForm.value.name,
             description: this.themeForm.value.description,
             status: ThemeStatus.OPEN,

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiService } from './api.service';
+import { CurrentSessionService } from './current-session.service';
 import { results } from './mockBooks';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { results } from './mockBooks';
 })
 export class OpenLibraryService {
 
-  constructor(public http: HttpClient, private api: ApiService) { }
+  constructor(public http: HttpClient, private api: CurrentSessionService) { }
 
   // assumes the search terms are already prepared
   searchForBooks(searchTerms): Observable<any[]> {

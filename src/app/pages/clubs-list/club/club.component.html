@@ -1,7 +1,7 @@
 <app-base-page>
   <app-page-breadcrumbs>
     <app-breadcrumb  [label]="club.name">
-      <app-icon-button *ngIf="api.isCurrentUserAdminOfClub(id)"
+      <app-icon-button *ngIf="session.isCurrentUserAdminOfClub(id)"
                        [icon]="'pencil'"
                        (click)="clubModalComponent.editClub(club)"></app-icon-button>
     </app-breadcrumb>
@@ -10,7 +10,7 @@
     <div class="left">
       <h4>
         Open Themes
-        <app-icon-button *ngIf="api.isCurrentUserAdminOfClub(this.id) && openThemes?.length"
+        <app-icon-button *ngIf="session.isCurrentUserAdminOfClub(this.id) && openThemes?.length"
                          [icon]="'plus-circle'"
                          (click)="themeModalComponent.createTheme(club.id)"></app-icon-button>
       </h4>

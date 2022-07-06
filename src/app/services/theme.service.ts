@@ -2,16 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ITheme, IBook, NominateBookRequest } from '../models/data-models';
-import { ApiService } from './api.service';
+import { CurrentSessionService } from './current-session.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
-  private readonly themeBaseUrl = `${this.api.baseUrl}/themes`;
+  private readonly themeBaseUrl = `${this.session.baseUrl}/themes`;
   private readonly themeUrl = (themeId: number) => `${this.themeBaseUrl}/${themeId}`;
 
-  constructor(public http: HttpClient, private api: ApiService) {}
+  constructor(public http: HttpClient, private session: CurrentSessionService) {}
 
   getThemes(clubId: number): Observable<ITheme[]> {
     return this.http.get<ITheme[]>(`${this.themeBaseUrl}/${clubId}`);
@@ -35,7 +35,7 @@ export class ThemeService {
 
   // Book Stuff
   nominateBook(themeId: number, nominatorId: number, workId: string, triggerWarnings: string): Observable<IBook> {
-    return this.http.post<IBook>(`${this.themeBaseUrl}/${themeId}/books`, 
+    return this.http.post<IBook>(`${this.themeBaseUrl}/${themeId}/books`,
       JSON.stringify({
         themeId: themeId,
         nominatorId: nominatorId,

@@ -48,10 +48,5 @@ export class AuthService {
     return this.userService.getMembershipsForCurrentUser()
       .pipe(tap(clubMemberships => this.session.saveCurrentUserMemberships(clubMemberships)))
   }
-
-  logout() {
-    this.session.removeStoredItem('token');
-    // TODO push to login
-  }
 }
 

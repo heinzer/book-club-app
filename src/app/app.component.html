@@ -2,11 +2,17 @@
   <div class="left">
     <a class="nav-item nav-link" href="">BOOKWORMS</a>
     <a class="nav-item nav-link" routerLink="/clubs" *ngIf="session.getCurrentUser">Clubs</a>
-    <a class="nav-item nav-link" routerLink="/stylepreview">Debug: Style preview</a>
+    <a class="nav-item nav-link" routerLink="/stylepreview" *ngIf="session.getCurrentUser">Debug: Style preview</a>
   </div>
   <div class="right">
     <a class="nav-item nav-link" routerLink="/login" *ngIf="!session.getCurrentUser">Login</a>
-    <a class="nav-item nav-link" routerLink="/profile" *ngIf="session.getCurrentUser"><fa-icon [icon]="'user-circle'"></fa-icon></a>
+    <div ngbDropdown display="dynamic" placement="bottom-end" class="d-inline-block">
+      <a class="nav-item nav-link" id="dropdownBasic1" ngbDropdownToggle *ngIf="session.getCurrentUser"><fa-icon [icon]="'user-circle'"></fa-icon></a>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem routerLink="/profile">Profile</button>
+        <button ngbDropdownItem (click)="logout()">Log Out</button>
+      </div>
+    </div>
   </div>
 </nav>
 

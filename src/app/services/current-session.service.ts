@@ -28,7 +28,13 @@ export class CurrentSessionService {
   }
 
   /* Token stuff */
-  getAuthToken() {
+  clearSessionData(): void {
+    this.removeStoredItem(this.storageKeys.TOKEN);
+    this.removeStoredItem(this.storageKeys.CURRENT_USER);
+    this.removeStoredItem(this.storageKeys.CURRENT_USER_MEMBERSHIPS);
+  }
+
+  getAuthToken(): string {
     if (this.token) { // token has already been loaded
       return this.token;
     }
@@ -40,7 +46,7 @@ export class CurrentSessionService {
     return possibleToken;
   }
 
-  saveAuthToken(authToken :string) {
+  saveAuthToken(authToken :string): void {
     console.log(authToken)
     this.saveStoredItem(this.storageKeys.TOKEN, authToken);
     this.token = authToken;
@@ -80,11 +86,35 @@ export class CurrentSessionService {
     return this.storage.getItem(key);
   }
 
-  saveStoredItem(key:string, item:any) {
+  saveStoredItem(key:string, item:any): void {
+    switch (key) {
+      case this.storageKeys.TOKEN:
+        this.token = item;
+        break;
+      case this.storageKeys.CURRENT_USER:
+        this.currentUser = item;
+        break;
+      case this.storageKeys.CURRENT_USER_MEMBERSHIPS:
+        this.currentUserMemberships = item;
+        break;
+    }
+
     return this.storage.setItem(key, item);
   }
 
-  removeStoredItem(key:string) {
+  removeStoredItem(key:string): void {
+    switch (key) {
+      case this.storageKeys.TOKEN:
+        this.token = null;
+        break;
+      case this.storageKeys.CURRENT_USER:
+        this.currentUser = null;
+        break;
+      case this.storageKeys.CURRENT_USER_MEMBERSHIPS:
+        this.currentUserMemberships = [];
+        break;
+    }
+
     return this.storage.removeItem(key);
   }
 }

@@ -16,8 +16,11 @@ $navbar_padding: 10px;
 .navbar .left a {
   margin-right: 10px;
 }
-.navbar .right a {
-  margin-left: 10px;
+.navbar .right {
+  height: 40px;
+  a {
+    margin-left: 10px;
+  }
 }
 
 .navbar .nav-item {

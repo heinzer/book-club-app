@@ -37,7 +37,6 @@ export class ClubModalComponent {
     const clubModal = this.modalService.open(this.content, {});
     clubModal.result.then(result => {
         if (result === ModalResults.DELETE) {
-          console.log('Deleting the club');
           this.clubService.deleteClub(club.id).subscribe(() => {
             this.router.navigate(['/clubs']);
           });

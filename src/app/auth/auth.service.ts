@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import {IClubMembership, IUser, LoginResponse} from '../models/data-models';
 import { CurrentSessionService } from '../services/current-session.service';
 import {UserService} from '../services/user.service';
@@ -18,9 +18,7 @@ export class AuthService {
   }
 
   isAuthenticated(): Observable<boolean> {
-    const token = this.session.getAuthToken()
-    // test token??
-    return of(true);
+    return this.http.get<boolean>(`${this.session.baseUrl}/isAuthed`);
   }
 
   register(firstName: string, email:string, password:string): Observable<LoginResponse> {

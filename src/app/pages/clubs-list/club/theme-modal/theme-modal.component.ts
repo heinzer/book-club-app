@@ -79,7 +79,7 @@ export class ThemeModalComponent {
         if (result === ModalResults.SAVE) {
           let newTheme: ITheme = {
             clubId: clubId,
-            nominatorId: this.session.currentUser?.id,
+            nominatorId: this.session.getCurrentUser.id,
             name: this.themeForm.value.name,
             description: this.themeForm.value.description,
             status: ThemeStatus.OPEN,

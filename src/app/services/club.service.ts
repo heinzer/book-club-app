@@ -33,7 +33,7 @@ export class ClubService {
   }
 
   createClub(club: IClub): Observable<IClub> {
-    return this.http.post<IClub>(this.clubBaseUrl, { adminId: this.session.currentUser?.id, ...club });
+    return this.http.post<IClub>(this.clubBaseUrl, { adminId: this.session.getCurrentUser.id, ...club });
   }
 
   editClub(club: IClub): Observable<IClub> {

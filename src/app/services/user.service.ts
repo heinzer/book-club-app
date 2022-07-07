@@ -12,6 +12,6 @@ export class UserService {
   constructor(public http: HttpClient, private session: CurrentSessionService) { }
 
   getMembershipsForCurrentUser(): Observable<IClubMembership[]> {
-      return this.http.get<IClubMembership[]>(`${this.session.baseUrl}/users/${this.session.currentUser?.id}/memberships`);
+    return this.http.get<IClubMembership[]>(`${this.session.baseUrl}/users/${this.session.getCurrentUser.id}/memberships`);
   }
 }

@@ -14,13 +14,16 @@ export class LoginComponent implements OnInit {
   password: string = "";
   error: any = "";
   loading = false;
+  showLogin = false
 
   constructor(public auth: AuthService, public session: CurrentSessionService, private router: Router) {
   }
 
   ngOnInit(): void {
-    if (this.session.currentUser) {
+    if (this.session.getCurrentUser) {
       this.router.navigate(['/clubs']);
+    } else {
+      this.showLogin = true
     }
   }
 

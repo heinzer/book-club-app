@@ -76,7 +76,7 @@ export class ThemeComponent implements OnInit {
 
   nominateBook(result) {
     let workId = result.key.replace('/works/','');
-    this.themeService.nominateBook(this.themeId, this.session.currentUser.id, workId, "trigger warning")
+    this.themeService.nominateBook(this.themeId, this.session.getCurrentUser.id, workId, "trigger warning")
     .subscribe(book => console.log('book:',book));
   }
 }

@@ -6,8 +6,8 @@ import {IClubMembership, IUser} from '../models/data-models';
 })
 export class CurrentSessionService {
   public baseUrl = "https://book-club-app-server.herokuapp.com";
-  public currentUser?: IUser;
-  public currentUserMemberships: IClubMembership[] = [];
+  private currentUser?: IUser;
+  private currentUserMemberships: IClubMembership[] = [];
   private storage;
   private token:string;
 
@@ -49,6 +49,21 @@ export class CurrentSessionService {
   saveCurrentUser(currentUser: IUser): void {
     this.saveStoredItem(this.storageKeys.CURRENT_USER, JSON.stringify(currentUser));
     this.currentUser = currentUser;
+  }
+
+  get getCurrentUser(): IUser {
+    if (this.currentUser) {
+      return this.currentUser
+    }
+
+    const possibleUser = this.getStoredItem(this.storageKeys.CURRENT_USER)
+    if (possibleUser) {
+      this.currentUser = JSON.parse(possibleUser)
+      return this.currentUser
+    }
+
+    // check the API
+    return this.currentUser
   }
 
   saveCurrentUserMemberships(currentUserMemberships: IClubMembership[]): void {

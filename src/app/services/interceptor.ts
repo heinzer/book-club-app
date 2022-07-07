@@ -9,9 +9,7 @@ import { debounceTime } from 'rxjs/operators';
 
 @Injectable()
 export class APIHttpInterceptor implements HttpInterceptor {
-  constructor(public session: CurrentSessionService) {
-
-  }
+  constructor(public session: CurrentSessionService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     req = req.clone({
@@ -21,6 +19,8 @@ export class APIHttpInterceptor implements HttpInterceptor {
         'Authorization': `Bearer ${this.session.getAuthToken()}`,
       },
     });
+
+    // todo: if API errors out because the token is bad > redirect to login page
 
     return next.handle(req);
   }

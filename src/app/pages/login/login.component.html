@@ -1,4 +1,4 @@
-<form (ngSubmit)="tryLogin()" class="login-component full-height">
+<form *ngIf="showLogin" (ngSubmit)="tryLogin()" class="login-component full-height">
   <h1>Welcome back to Book Club!</h1>
   <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">

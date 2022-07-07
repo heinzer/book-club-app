@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { IClub } from '../../models/data-models';
-import { AuthService } from '../../auth/auth.service';
 import { CurrentSessionService } from '../../services/current-session.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';

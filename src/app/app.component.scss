@@ -7,32 +7,38 @@ $navbar_padding: 10px;
   height: $navbar_height;
   justify-content: space-between;
   background: var(--olive) !important;
-}
 
-.navbar .left {
-  display: flex;
-}
-
-.navbar .left a {
-  margin-right: 10px;
-}
-.navbar .right {
-  height: 40px;
-  a {
-    margin-left: 10px;
+  .left {
+    display: flex;
+    a {
+      margin-right: 10px;
+    }
   }
-}
 
-.navbar .nav-item {
-  color: white;
-  text-decoration: none;
-  transition: 0.2s all;
-}
-.navbar .nav-item:hover {
-  color: var(--sand);
-}
-.navbar .nav-item .fas {
-  color: white;
+  .right {
+    height: 40px;
+    a {
+      margin-left: 10px;
+    }
+  }
+
+  .nav-item {
+    color: white;
+    text-decoration: none;
+    transition: 0.2s all;
+
+    &:hover {
+      color: var(--sand);
+    }
+
+    .fas {
+      color: white;
+    }
+  }
+
+  .profile {
+    padding: 0rem 1rem;
+  }
 }
 
 .router-outlet-body {

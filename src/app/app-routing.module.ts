@@ -7,7 +7,7 @@ import { ClubComponent } from './pages/clubs-list/club/club.component';
 import { ThemeComponent } from './pages/theme/theme.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { StylePreviewComponent } from './pages/style-preview/style-preview.component';
-import {ProfileComponent} from './pages/profile/profile.component';
+import {SettingsComponent} from './pages/profile/settings.component';
 
 const routes: Routes = [
   {
@@ -34,8 +34,8 @@ const routes: Routes = [
     canActivate: [ AuthGuard ]
   },
   {
-    path: 'profile',
-    component: ProfileComponent,
+    path: 'settings',
+    component: SettingsComponent,
     canActivate: [ AuthGuard ]
   },
   {

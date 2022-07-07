@@ -9,7 +9,7 @@
     <div ngbDropdown display="dynamic" placement="bottom-end" class="d-inline-block">
       <a class="nav-item nav-link profile" id="dropdownBasic1" ngbDropdownToggle *ngIf="session.getCurrentUser"><fa-icon [icon]="'user-circle'"></fa-icon></a>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <button ngbDropdownItem routerLink="/profile">Profile</button>
+        <button ngbDropdownItem routerLink="/settings">Account Settings</button>
         <button ngbDropdownItem (click)="logout()">Log Out</button>
       </div>
     </div>

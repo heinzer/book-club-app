@@ -1,0 +1,44 @@
+<app-base-page>
+  <app-page-breadcrumbs>
+    <app-breadcrumb [label]="'Account Settings'"></app-breadcrumb>
+  </app-page-breadcrumbs>
+  <div class="mb-3 row">
+    <label for="firstName" class="col-sm-2 col-form-label">First Name</label>
+    <div class="col-sm-10">
+      <input type="text" disabled class="form-control" id="firstName" value="{{session.getCurrentUser.firstName}}">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="lastName" class="col-sm-2 col-form-label">First Name</label>
+    <div class="col-sm-10">
+      <input type="text" disabled class="form-control" id="lastName" value="{{session.getCurrentUser.lastName}}">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="email" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      <input type="text" disabled class="form-control" id="email" value="{{session.getCurrentUser.email}}">
+    </div>
+  </div>
+  <div class="mb-3 row" *ngIf="session.getCurrentUser.city">
+    <label for="city" class="col-sm-2 col-form-label">City</label>
+    <div class="col-sm-10">
+      <input type="text" disabled class="form-control" id="city" value="{{session.getCurrentUser.city}}">
+    </div>
+  </div>
+  <div class="mb-3 row" *ngIf="session.getCurrentUser.state">
+    <label for="state" class="col-sm-2 col-form-label">State</label>
+    <div class="col-sm-10">
+      <input type="text" disabled class="form-control" id="state" value="{{session.getCurrentUser.state}}">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" disabled placeholder="********" class="form-control" id="inputPassword">
+    </div>
+  </div>
+  <!-- Name -->
+  <!-- Email (disabled) -->
+  <!-- Password reset -->
+</app-base-page>

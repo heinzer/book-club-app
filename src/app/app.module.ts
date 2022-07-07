@@ -19,7 +19,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { StylePreviewComponent } from './pages/style-preview/style-preview.component';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {ProfileComponent} from './pages/profile/profile.component';
+import {SettingsComponent} from './pages/profile/settings.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import {faPencil, faPlusCircle, faUsers} from '@fortawesome/free-solid-svg-icons';
 import {ClubModalComponent} from './pages/clubs-list/club-modal/club-modal.component';
@@ -34,7 +34,7 @@ import {ThemeModalComponent} from './pages/clubs-list/club/theme-modal/theme-mod
     ClubModalComponent,
     DeadlineComponent,
     LoginComponent,
-    ProfileComponent,
+    SettingsComponent,
     RegisterComponent,
     StylePreviewComponent,
     ThemeComponent,

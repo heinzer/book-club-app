@@ -61,7 +61,7 @@
       </div>
 
       <div class="panel-no-sidebar" *ngIf="shouldShowNominationSection">
-        <input type="text" class="search-bar" placeholder="Search for a book by title or author" (keyup)="search()" [(ngModel)]="searchTerms">
+        <input type="text" class="search-bar" #searchbar placeholder="Search for a book by title or author" (keyup)="getSearchTerms($event)" [(ngModel)]="searchTerms">
         <div class="search-results" *ngIf="results">
           <div class="result" *ngFor='let result of results["docs"]'>
             <img class="book-cover" *ngIf="result.cover_i" [src]="buildImg(result)">

@@ -9,6 +9,10 @@ import {ClubService} from '../../services/club.service';
 import {ThemePhase} from './deadline/deadline.component';
 import { OpenLibraryService } from '../../services/openlibrary.service';
 
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, map, tap } from 'rxjs/operators';
+import { ElementRef } from '@angular/core';
+
 @Component({
   selector: 'app-theme',
   templateUrl: './theme.component.html',
@@ -22,6 +26,10 @@ export class ThemeComponent implements OnInit {
   clubId: number;
   members: IUserMembership[];
   nominations = [];
+
+  @ViewChild('searchbar') searchbar: ElementRef;
+  results$: Observable<any>;
+  subject = new Subject();
 
   shouldShowNominationSection: boolean = false;
   searchTerms: string = '';
@@ -44,6 +52,14 @@ export class ThemeComponent implements OnInit {
       this.themeService.getTheme(this.themeId).subscribe(theme => this.theme = theme);
       this.clubService.getMembershipsForClub(this.clubId).subscribe(members => this.members = members);
     });
+
+    this.results$ = this.subject.pipe(
+      debounceTime(1000),
+      map(searchText => this.search(searchText))
+    )
+    this.results$.subscribe(r => {
+      console.log('r:',r)
+    })
   }
 
   refreshWithUpdatedTheme(theme: ITheme): void {
@@ -54,20 +70,21 @@ export class ThemeComponent implements OnInit {
     this.shouldShowNominationSection = true;
   }
 
-  search() {
-    let timer;
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      console.log('terms:',this.searchTerms)
-      // search
-      let cleanedSearchTerms = encodeURI(this.searchTerms.replace(' ','+').trim());
-      this.openLibraryService.searchForBooks(cleanedSearchTerms)
-      .subscribe(results => {
-        this.results = results;
-        console.log('results:',results)
-      });
-      // this.results = this.openLibraryService.mockSearchBooks();
-    }, 500);
+  getSearchTerms(evt) {
+    const searchText = evt.target.value
+    this.subject.next(searchText)
+  }
+
+  search(searchText) {
+    console.log('terms:',searchText)
+    // search
+    let cleanedSearchTerms = encodeURI(searchText.replace(' ','+').trim());
+    return this.openLibraryService.searchForBooks(cleanedSearchTerms)
+    .subscribe(results => {
+      this.results = results;
+      console.log('results:',results)
+    });
+    // this.results = this.openLibraryService.mockSearchBooks();
   };
 
   buildImg(result) {

@@ -12,13 +12,18 @@ export class APIHttpInterceptor implements HttpInterceptor {
   constructor(public session: CurrentSessionService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    req = req.clone({
-      setHeaders: {
-        'Content-Type' : 'application/json; charset=utf-8',
-        'Accept'       : 'application/json',
-        'Authorization': `Bearer ${this.session.getAuthToken()}`,
-      },
-    });
+    if (req.url.indexOf('openlibrary') > 0) { 
+      // openlibrary cannot have the content-type header
+      req = req.clone();
+    } else {
+      req = req.clone({
+        setHeaders: {
+          'Content-Type' : 'application/json; charset=utf-8',
+          'Accept'       : 'application/json',
+          'Authorization': `Bearer ${this.session.getAuthToken()}`,
+        },
+      });
+    }
 
     // todo: if API errors out because the token is bad > redirect to login page
 

@@ -9,7 +9,7 @@ import {ThemePhase} from './deadline/deadline.component';
 import { OpenLibraryService } from '../../services/openlibrary.service';
 
 import {interval, Observable, Subject} from 'rxjs';
-import {debounce, debounceTime, distinct, map, mergeMap, switchMap, tap} from 'rxjs/operators';
+import {debounce, distinct, switchMap, tap} from 'rxjs/operators';
 import { ElementRef } from '@angular/core';
 
 @Component({
@@ -68,13 +68,10 @@ export class ThemeComponent implements OnInit {
   }
 
   onSearchTermsChange(event): void {
-    console.log("searchterms event", event)
-    console.log('serchterms value', event.target.value)
     this.searchTerms$.next(event.target.value)
   }
 
   search(searchText: string): Observable<IOpenLibraryResponse> {
-    console.log('making api cal wwith search text: ', searchText)
     let cleanedSearchTerms = encodeURI(searchText.replace(' ','+').trim());
     return this.openLibraryService.searchForBooks(cleanedSearchTerms)
   };

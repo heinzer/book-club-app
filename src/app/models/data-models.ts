@@ -71,3 +71,23 @@ export interface IBookEntity {
   workId: string;
   triggerWarnings: string;
 }
+
+export interface IOpenLibraryResponse {
+  docs: IOpenLibraryDocument[];
+  numFound: number;
+  numFoundExact: boolean;
+  num_found: number;
+  q: string;
+  start: number;
+}
+
+export interface IOpenLibraryDocument {
+  author_name: string[]
+  cover_i: number
+  first_publish_year: number
+  key: string
+  number_of_pages_median: number
+  subject: string[]
+  title: string
+  type: string
+}

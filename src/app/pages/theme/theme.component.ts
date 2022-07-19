@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {IClub, ITheme, IUserMembership} from '../../models/data-models';
-import { AuthService } from '../../auth/auth.service';
+import {IClub, IOpenLibraryResponse, ITheme, IUserMembership} from '../../models/data-models';
 import { CurrentSessionService } from '../../services/current-session.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
@@ -9,8 +8,8 @@ import {ClubService} from '../../services/club.service';
 import {ThemePhase} from './deadline/deadline.component';
 import { OpenLibraryService } from '../../services/openlibrary.service';
 
-import { Observable, Subject } from 'rxjs';
-import { debounceTime, map, tap } from 'rxjs/operators';
+import {interval, Observable, Subject} from 'rxjs';
+import {debounce, debounceTime, distinct, map, mergeMap, switchMap, tap} from 'rxjs/operators';
 import { ElementRef } from '@angular/core';
 
 @Component({
@@ -28,17 +27,15 @@ export class ThemeComponent implements OnInit {
   nominations = [];
 
   @ViewChild('searchbar') searchbar: ElementRef;
-  results$: Observable<any>;
-  subject = new Subject();
+  results$: Observable<IOpenLibraryResponse>;
+  searchTerms$ = new Subject<string>();
 
   shouldShowNominationSection: boolean = false;
-  searchTerms: string = '';
-  results: object;
+  isSearching: boolean = false;
 
   ThemePhase = ThemePhase;
 
-  constructor(public auth: AuthService,
-              public session: CurrentSessionService,
+  constructor(public session: CurrentSessionService,
               private router: Router, private route: ActivatedRoute,
               private themeService: ThemeService,
               private clubService: ClubService,
@@ -53,13 +50,13 @@ export class ThemeComponent implements OnInit {
       this.clubService.getMembershipsForClub(this.clubId).subscribe(members => this.members = members);
     });
 
-    this.results$ = this.subject.pipe(
-      debounceTime(1000),
-      map(searchText => this.search(searchText))
+    this.results$ = this.searchTerms$.pipe(
+      distinct(),
+      debounce(() => interval(500)),
+      tap(() => this.isSearching = true),
+      switchMap(searchText => this.search(searchText)),
+      tap(() => this.isSearching = false)
     )
-    this.results$.subscribe(r => {
-      console.log('r:',r)
-    })
   }
 
   refreshWithUpdatedTheme(theme: ITheme): void {
@@ -70,21 +67,16 @@ export class ThemeComponent implements OnInit {
     this.shouldShowNominationSection = true;
   }
 
-  getSearchTerms(evt) {
-    const searchText = evt.target.value
-    this.subject.next(searchText)
+  onSearchTermsChange(event): void {
+    console.log("searchterms event", event)
+    console.log('serchterms value', event.target.value)
+    this.searchTerms$.next(event.target.value)
   }
 
-  search(searchText) {
-    console.log('terms:',searchText)
-    // search
+  search(searchText: string): Observable<IOpenLibraryResponse> {
+    console.log('making api cal wwith search text: ', searchText)
     let cleanedSearchTerms = encodeURI(searchText.replace(' ','+').trim());
     return this.openLibraryService.searchForBooks(cleanedSearchTerms)
-    .subscribe(results => {
-      this.results = results;
-      console.log('results:',results)
-    });
-    // this.results = this.openLibraryService.mockSearchBooks();
   };
 
   buildImg(result) {

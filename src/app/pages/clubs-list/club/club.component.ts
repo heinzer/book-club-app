@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import {combineLatest, forkJoin} from "rxjs";
+import {mergeMap, tap} from "rxjs/operators";
 import {IClub, ITheme, IUserMembership, ThemeStatus} from '../../../models/data-models';
 import { CurrentSessionService } from '../../../services/current-session.service';
 import { ClubService } from '../../../services/club.service';
@@ -22,6 +24,7 @@ export class ClubComponent implements OnInit {
   themes: ITheme[];
   openThemes: ITheme[];
   closedThemes: ITheme[];
+  loading = true;
 
   constructor(public session: CurrentSessionService,
               private clubService: ClubService,
@@ -30,20 +33,21 @@ export class ClubComponent implements OnInit {
               private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.id = +params['clubId']
-      this.clubService.getClub(this.id).subscribe(club => this.club = club);
-      this.clubService.getMembershipsForClub(this.id).subscribe(members => this.members = members);
-      this.fetchThemes();
-    });
-  }
-
-  fetchThemes() {
-    this.clubService.getClubThemes(this.id).subscribe(themes => {
-      this.themes = themes;
-      this.openThemes = themes.filter(t => t.status === ThemeStatus.OPEN);
-      this.closedThemes = themes.filter(t => t.status === ThemeStatus.CLOSED);
-    });
+    this.route.params.pipe(
+      tap(params => this.id = +params['clubId']),
+      mergeMap(() => combineLatest(this.clubService.getClub(this.id),
+        this.clubService.getMembershipsForClub(this.id),
+        this.clubService.getClubThemes(this.id)).pipe(
+          tap(([club, memberships, themes]) => {
+            this.club = club;
+            this.members = memberships;
+            this.themes = themes;
+            this.openThemes = themes.filter(t => t.status === ThemeStatus.OPEN);
+            this.closedThemes = themes.filter(t => t.status === ThemeStatus.CLOSED);
+            this.loading = false;
+          })
+      ))
+    ).subscribe();
   }
 
   refreshWithUpdatedClub(club: IClub): void {

@@ -1,46 +1,51 @@
 <app-base-page>
-  <app-page-breadcrumbs>
-    <app-breadcrumb  [label]="club.name">
-      <app-icon-button *ngIf="session.isCurrentUserAdminOfClub(id)"
-                       [icon]="'pencil'"
-                       (click)="clubModalComponent.editClub(club)"></app-icon-button>
-    </app-breadcrumb>
-  </app-page-breadcrumbs>
-  <div class="panel-with-sidebar">
-    <div class="left">
-      <h4>
-        Open Themes
-        <app-icon-button *ngIf="session.isCurrentUserAdminOfClub(this.id) && openThemes?.length"
-                         [icon]="'plus-circle'"
-                         (click)="themeModalComponent.createTheme(club.id)"></app-icon-button>
-      </h4>
-      <ng-container *ngFor="let theme of openThemes">
-        <app-theme-summary [theme]="theme" [clubId]="id"></app-theme-summary>
-      </ng-container>
-      <app-dotted-container *ngIf="!openThemes?.length">
-        <div class="no-themes-container">
-          <p>No themes have been added</p>
-          <button class="secondary-button" (click)="themeModalComponent.createTheme(club.id)">+ Add Theme</button>
-        </div>
-      </app-dotted-container>
-
-      <ng-container *ngIf="closedThemes?.length">
-        <h4 class="closed-theme-header">Completed Themes</h4>
-        <ng-container *ngFor="let theme of closedThemes">
-          <app-theme-summary class="closed-theme" [theme]="theme" [clubId]="id"></app-theme-summary>
+  <ng-container *ngIf="!loading; else spinner">
+    <app-page-breadcrumbs>
+      <app-breadcrumb  [label]="club.name">
+        <app-icon-button *ngIf="session.isCurrentUserAdminOfClub(id)"
+                         [icon]="'pencil'"
+                         (click)="clubModalComponent.editClub(club)"></app-icon-button>
+      </app-breadcrumb>
+    </app-page-breadcrumbs>
+    <div class="panel-with-sidebar">
+      <div class="left">
+        <h4>
+          Open Themes
+          <app-icon-button *ngIf="session.isCurrentUserAdminOfClub(this.id) && openThemes?.length"
+                           [icon]="'plus-circle'"
+                           (click)="themeModalComponent.createTheme(club.id)"></app-icon-button>
+        </h4>
+        <ng-container *ngFor="let theme of openThemes">
+          <app-theme-summary [theme]="theme" [clubId]="id"></app-theme-summary>
         </ng-container>
-      </ng-container>
-    </div>
+        <app-dotted-container *ngIf="!openThemes?.length">
+          <div class="no-themes-container">
+            <p>No themes have been added</p>
+            <button class="secondary-button" (click)="themeModalComponent.createTheme(club.id)">+ Add Theme</button>
+          </div>
+        </app-dotted-container>
 
-    <div class="right" *ngIf="members && members.length > 0">
-      <div class="members">
-        <h4>Members</h4>
-        <ng-container *ngFor="let member of members">
-          <h6>{{ member.firstName }} {{ member.lastName ? member.lastName[0] : '' }} {{ member.isAdmin ? '(admin)' : '' }}</h6>
+        <ng-container *ngIf="closedThemes?.length">
+          <h4 class="closed-theme-header">Completed Themes</h4>
+          <ng-container *ngFor="let theme of closedThemes">
+            <app-theme-summary class="closed-theme" [theme]="theme" [clubId]="id"></app-theme-summary>
+          </ng-container>
         </ng-container>
       </div>
+
+      <div class="right" *ngIf="members && members.length > 0">
+        <div class="members">
+          <h4>Members</h4>
+          <ng-container *ngFor="let member of members">
+            <h6>{{ member.firstName }} {{ member.lastName ? member.lastName[0] : '' }} {{ member.isAdmin ? '(admin)' : '' }}</h6>
+          </ng-container>
+        </div>
+      </div>
     </div>
-  </div>
+  </ng-container>
+  <ng-template #spinner>
+    <app-spinner></app-spinner>
+  </ng-template>
 </app-base-page>
 
 <app-club-modal (refreshEvent)="refreshWithUpdatedClub($event)"></app-club-modal>

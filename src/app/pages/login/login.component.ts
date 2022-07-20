@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {CurrentSessionService} from '../../services/current-session.service';
 import {Router} from '@angular/router';
-import {mergeMap} from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -20,8 +20,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.session.getCurrentUser) {
-      this.router.navigate(['/clubs']);
+    if (this.session.getAuthToken()) { // check that token is still valid
+      this.auth.isAuthenticated().subscribe(isAuthed => {
+        if (isAuthed) {
+          this.router.navigate(['/clubs']);
+        }
+      })
     } else {
       this.showLogin = true
     }

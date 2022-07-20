@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
-import {CurrentSessionService} from '../../services/current-session.service';
-import {mergeMap, tap} from 'rxjs/operators';
-import {LoginResponse} from '../../models/data-models';
-import {UserService} from '../../services/user.service';
+import { mergeMap } from 'rxjs/operators';
+import {CurrentSessionService} from "../../services/current-session.service";
 
 @Component({
   selector: 'app-register',
@@ -17,11 +15,22 @@ export class RegisterComponent implements OnInit {
   password: string = "";
   error: any = "";
   loading = false;
+  showLogin = false
 
   constructor(public auth: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private session: CurrentSessionService) { }
 
   ngOnInit(): void {
+    if (this.session.getAuthToken()) { // check that token is still valid
+      this.auth.isAuthenticated().subscribe(isAuthed => {
+        if (isAuthed) {
+          this.router.navigate(['/clubs']);
+        }
+      })
+    } else {
+      this.showLogin = true
+    }
   }
 
   registerUser() {
@@ -46,7 +55,7 @@ export class RegisterComponent implements OnInit {
     this.error = "";
   }
 
-  login() {
+  goToLogin() {
     this.router.navigate(['/login']);
   }
 }

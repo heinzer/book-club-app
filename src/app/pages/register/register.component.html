@@ -1,4 +1,4 @@
-<form class="register-component full-height" (ngSubmit)="registerUser()">
+<form *ngIf="showLogin" class="register-component full-height" (ngSubmit)="registerUser()">
   <h1>Sign up for Book Club!</h1>
   <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
@@ -19,6 +19,6 @@
   <button class="main-button register" type="submit" [disabled]="!firstName || !email || !password || loading">Sign up</button>
 
   <div class="login">
-    Already a member? <button class="main-button inline" (click)="login()">Login here</button>
+    Already a member? <button class="main-button inline" (click)="goToLogin()">Login here</button>
   </div>
 </form>

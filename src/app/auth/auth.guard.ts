@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {catchError, map} from "rxjs/operators";
+import {CurrentSessionService} from "../services/current-session.service";
 import {AuthService} from "./auth.service";
 
 @Injectable({
@@ -10,6 +11,7 @@ import {AuthService} from "./auth.service";
 export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService,
+              private session: CurrentSessionService,
               private router: Router) {
   }
 
@@ -20,10 +22,14 @@ export class AuthGuard implements CanActivate {
           if (response) {
             return true;
           }
+          // clear data
+          this.session.clearSessionData();
           this.router.navigate(['/login']);
           return false;
         }),
         catchError((error) => {
+          // clear data
+          this.session.clearSessionData();
           this.router.navigate(['/login']);
           return of(false);
         }));

@@ -68,7 +68,7 @@ export class CurrentSessionService {
       return this.currentUser
     }
 
-    // check the API
+    // todo check the API
     return this.currentUser
   }
 

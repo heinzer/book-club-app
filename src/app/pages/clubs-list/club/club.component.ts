@@ -1,13 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {IClub, ITheme, IUser, IUserMembership, ThemeStatus} from '../../../models/data-models';
+import {IClub, ITheme, IUserMembership, ThemeStatus} from '../../../models/data-models';
 import { CurrentSessionService } from '../../../services/current-session.service';
-import { AuthService } from '../../../auth/auth.service';
 import { ClubService } from '../../../services/club.service';
 import { ThemeService } from '../../../services/theme.service';
-import { UserService } from '../../../services/user.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ClubModalComponent} from '../club-modal/club-modal.component';
 import {ThemeModalComponent} from './theme-modal/theme-modal.component';
 

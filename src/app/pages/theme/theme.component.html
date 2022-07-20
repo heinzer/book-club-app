@@ -61,7 +61,10 @@
       </div>
 
       <div class="panel-no-sidebar" *ngIf="shouldShowNominationSection">
-        <input type="text" class="search-bar" #searchbar placeholder="Search for a book by title or author" (keyup)="onSearchTermsChange($event)">
+        <div class="search-bar">
+          <input type="text" class="search-bar" #searchbar placeholder="Search for a book by title or author" (keyup)="onSearchTermsChange($event)">
+          <fa-icon [icon]="'xmark'" (click)="exitSearch()"></fa-icon>
+        </div>
         <div class="spinner-border" role="status" *ngIf="isSearching">
           <span class="sr-only">Loading...</span>
         </div>

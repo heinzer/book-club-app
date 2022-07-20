@@ -19,17 +19,16 @@ import { ElementRef } from '@angular/core';
 })
 export class ThemeComponent implements OnInit {
   @ViewChild(ThemeModalComponent) themeModalComponent: ThemeModalComponent;
+  @ViewChild('searchbar') searchbar: ElementRef;
+  results$: Observable<IOpenLibraryResponse>;
+  searchTerms$ = new Subject<string>();
+
   theme: ITheme;
   club: IClub;
   themeId: number;
   clubId: number;
   members: IUserMembership[];
   nominations = [];
-
-  @ViewChild('searchbar') searchbar: ElementRef;
-  results$: Observable<IOpenLibraryResponse>;
-  searchTerms$ = new Subject<string>();
-
   shouldShowNominationSection: boolean = false;
   isSearching: boolean = false;
 
@@ -75,6 +74,11 @@ export class ThemeComponent implements OnInit {
     let cleanedSearchTerms = encodeURI(searchText.replace(' ','+').trim());
     return this.openLibraryService.searchForBooks(cleanedSearchTerms)
   };
+
+  exitSearch(): void {
+    // todo cancel any api calls
+    this.shouldShowNominationSection = false;
+  }
 
   buildImg(result) {
     return `https://covers.openlibrary.org/b/id/${result.cover_i}-M.jpg`;

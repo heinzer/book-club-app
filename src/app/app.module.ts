@@ -21,7 +21,7 @@ import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {SettingsComponent} from './pages/profile/settings.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import {faPencil, faPlusCircle, faUsers} from '@fortawesome/free-solid-svg-icons';
+import {faPencil, faPlusCircle, faUsers, faXmark} from '@fortawesome/free-solid-svg-icons';
 import {ClubModalComponent} from './pages/clubs-list/club-modal/club-modal.component';
 import {ThemeModalComponent} from './pages/clubs-list/club/theme-modal/theme-modal.component';
 
@@ -66,6 +66,6 @@ import {ThemeModalComponent} from './pages/clubs-list/club/theme-modal/theme-mod
 export class AppModule {
   constructor(library: FaIconLibrary) {
     // Add an icon to the library for convenient access in other components
-    library.addIcons(faPlusCircle, faUsers, faPencil);
+    library.addIcons(faPlusCircle, faUsers, faPencil, faXmark);
   }
 }

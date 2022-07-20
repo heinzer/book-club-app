@@ -81,6 +81,14 @@
 // TODO this should be pulled out elsewhere
 .search-bar {
   width: 100%;
+  display: inline-block;
+  input {
+    width: 100%;
+  }
+  fa-icon {
+    margin-left: -30px;
+    cursor: pointer;
+  }
 }
 
 .search-results {

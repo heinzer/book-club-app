@@ -76,9 +76,10 @@
 
 :host ::ng-deep .closed-theme {
   app-solid-container-with-hover {
-    background-color: #e6e6e6;
+    background-color: #F5F5F5;
+    color: #505050;
     &:hover {
-      background-color: #bababa;
+      background-color: #e6e6e6;
     }
   }
 }

@@ -9,11 +9,4 @@ import {Router} from '@angular/router';
 export class BreadcrumbComponent {
   @Input() label: string;
   @Input() route: string;
-
-  constructor(private router: Router) {}
-
-  navigateRoute(route: string): void {
-    console.log(route);
-    // this.router.navigate([route]);
-  }
 }

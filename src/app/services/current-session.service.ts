@@ -47,7 +47,6 @@ export class CurrentSessionService {
   }
 
   saveAuthToken(authToken :string): void {
-    console.log(authToken)
     this.saveStoredItem(this.storageKeys.TOKEN, authToken);
     this.token = authToken;
   }

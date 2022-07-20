@@ -91,8 +91,6 @@ export class ThemeComponent implements OnInit {
   }
 
   isValidBook(document: IOpenLibraryDocument): boolean {
-    const temp = document.author_name?.length > 0;
-    console.log(temp)
-    return temp;
+    return document.author_name?.length > 0;
   }
 }

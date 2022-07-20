@@ -65,29 +65,29 @@
           <input type="text" class="search-bar" #searchbar placeholder="Search for a book by title or author" (keyup)="onSearchTermsChange($event)">
           <fa-icon [icon]="'xmark'" (click)="exitSearch()"></fa-icon>
         </div>
-        <div class="spinner-border" role="status" *ngIf="isSearching">
-          <span class="sr-only">Loading...</span>
-        </div>
+        <app-spinner *ngIf="isSearching"></app-spinner>
         <div class="search-results" *ngIf="results$ | async as results">
           <ng-container *ngIf="!isSearching">
             <ng-container *ngIf="results.docs.length > 0; else no_results">
-              <div class="result" *ngFor='let result of results.docs'>
-                <img class="book-cover" *ngIf="result.cover_i" [src]="buildImg(result)">
-                <img class="book-cover bordered" *ngIf="!result.cover_i">
-                <div class="result-contents">
-                  <div class="left-content">
-                    <b>{{result.title}}</b>
-                    <span>by {{result.author_name[0]}}</span>
+              <ng-container *ngFor='let result of results.docs'>
+                <div class="result" *ngIf="isValidBook(result)">
+                  <img class="book-cover" *ngIf="result.cover_i" [src]="buildImg(result)">
+                  <img class="book-cover bordered" *ngIf="!result.cover_i">
+                  <div class="result-contents">
+                    <div class="left-content">
+                      <b>{{result.title}}</b>
+                      <span>by {{result.author_name[0]}}</span>
 
-                    <span>First published in {{result.first_publish_year}}</span>
-                    <span>~{{result.number_of_pages_median}} pages</span>
-                  </div>
-                  <div class="right-content">
-                    <!-- TODO links to goodreads, amazon, etc -->
-                    <button class="result-button nominate" (click)="nominateBook(result)">Nominate this book</button>
+                      <span>First published in {{result.first_publish_year}}</span>
+                      <span>~{{result.number_of_pages_median}} pages</span>
+                    </div>
+                    <div class="right-content">
+                      <!-- TODO links to goodreads, amazon, etc -->
+                      <button class="result-button nominate" (click)="nominateBook(result)">Nominate this book</button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </ng-container>
             </ng-container>
             <ng-template #no_results><p>No Results Found...</p></ng-template>
           </ng-container>

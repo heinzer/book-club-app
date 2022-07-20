@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {IClub, IOpenLibraryResponse, ITheme, IUserMembership} from '../../models/data-models';
+import {IClub, IOpenLibraryDocument, IOpenLibraryResponse, ITheme, IUserMembership} from '../../models/data-models';
 import { CurrentSessionService } from '../../services/current-session.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
@@ -88,5 +88,11 @@ export class ThemeComponent implements OnInit {
     let workId = result.key.replace('/works/','');
     this.themeService.nominateBook(this.themeId, this.session.getCurrentUser.id, workId, "trigger warning")
     .subscribe(book => console.log('book:',book));
+  }
+
+  isValidBook(document: IOpenLibraryDocument): boolean {
+    const temp = document.author_name?.length > 0;
+    console.log(temp)
+    return temp;
   }
 }

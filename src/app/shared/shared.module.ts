@@ -14,6 +14,7 @@ import {faChevronRight, faPencil, faPlusCircle, faUserCircle, faUsers} from '@fo
 import {IconButtonComponent} from './icon-button/icon-button.component';
 import {BreadcrumbComponent} from './page-breadcumbs/breadcrumb/breadcrumb.component';
 import {RouterModule} from '@angular/router';
+import {SpinnerComponent} from "./spinner/spinner.component";
 
 export const components = [
   BasePageComponent,
@@ -23,7 +24,8 @@ export const components = [
   PageBreadcrumbsComponent,
   PasswordInputComponent,
   SolidContainerComponent,
-  SolidContainerWithHoverComponent
+  SolidContainerWithHoverComponent,
+  SpinnerComponent
 ];
 
 export const pipes = [

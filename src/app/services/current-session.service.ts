@@ -72,13 +72,27 @@ export class CurrentSessionService {
     return this.currentUser
   }
 
+  getCurrentUserMemberships(): IClubMembership[] {
+    if (this.currentUserMemberships.length && this.currentUserMemberships.length > 0) {
+      return this.currentUserMemberships
+    }
+
+    const possibleMemberships = this.getStoredItem(this.storageKeys.CURRENT_USER_MEMBERSHIPS)
+    if (possibleMemberships) {
+      this.currentUserMemberships = JSON.parse(possibleMemberships)
+      return this.currentUserMemberships
+    }
+
+    return this.currentUserMemberships
+  }
+
   saveCurrentUserMemberships(currentUserMemberships: IClubMembership[]): void {
     this.saveStoredItem(this.storageKeys.CURRENT_USER_MEMBERSHIPS, JSON.stringify(currentUserMemberships));
     this.currentUserMemberships = currentUserMemberships
   }
 
   isCurrentUserAdminOfClub(clubId: number): boolean {
-    return this.currentUserMemberships.find(clubMembership => clubMembership.id === clubId)?.isAdmin;
+    return this.getCurrentUserMemberships().find(clubMembership => clubMembership.id === clubId)?.isAdmin;
   }
 
   /* Accessing local storage functions */

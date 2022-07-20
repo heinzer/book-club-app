@@ -14,13 +14,17 @@ export class ClubsListComponent implements OnInit {
   @ViewChild(ClubModalComponent) clubModalComponent: ClubModalComponent;
 
   clubs: IClub[] = [];
+  loading = true;
 
   constructor(private session: CurrentSessionService,
               private router: Router,
               private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userService.getMembershipsForCurrentUser().subscribe(clubs => this.clubs = clubs);
+    this.userService.getMembershipsForCurrentUser().subscribe(clubs => {
+      this.clubs = clubs;
+      this.loading = false;
+    });
   }
 
   refreshWithNewClub(club: IClub): void {

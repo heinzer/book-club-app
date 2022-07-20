@@ -1,21 +1,26 @@
 <app-base-page>
-  <app-page-breadcrumbs>
-    <app-breadcrumb [label]="'My Clubs'">
-      <app-icon-button [icon]="'plus-circle'"
-                       (click)="clubModalComponent.createClub()"></app-icon-button>
-    </app-breadcrumb>
-  </app-page-breadcrumbs>
+  <ng-container *ngIf="!loading; else spinner">
+    <app-page-breadcrumbs>
+      <app-breadcrumb [label]="'My Clubs'">
+        <app-icon-button [icon]="'plus-circle'"
+                         (click)="clubModalComponent.createClub()"></app-icon-button>
+      </app-breadcrumb>
+    </app-page-breadcrumbs>
 
-  <ng-container *ngFor="let club of clubs">
-    <app-club-summary [club]="club"></app-club-summary>
+    <ng-container *ngFor="let club of clubs">
+      <app-club-summary [club]="club"></app-club-summary>
+    </ng-container>
+
+    <app-dotted-container *ngIf="!clubs?.length">
+      <div class="no-themes-container">
+        <p>No clubs have been added</p>
+        <button class="secondary-button" (click)="clubModalComponent.createClub()">+ Add Club</button>
+      </div>
+    </app-dotted-container>
   </ng-container>
-
-  <app-dotted-container *ngIf="!clubs?.length">
-    <div class="no-themes-container">
-      <p>No clubs have been added</p>
-      <button class="secondary-button" (click)="clubModalComponent.createClub()">+ Add Club</button>
-    </div>
-  </app-dotted-container>
+  <ng-template #spinner>
+    <app-spinner></app-spinner>
+  </ng-template>
 </app-base-page>
 
 <app-club-modal (refreshEvent)="refreshWithNewClub($event)"></app-club-modal>

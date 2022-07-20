@@ -5,6 +5,7 @@
   display: flex;
   &:hover {
     cursor: pointer;
-    border: 1px solid var(--olive);
+    background: var(--alibaster);
+    border: 1px solid var(--asparagus);
   }
 }

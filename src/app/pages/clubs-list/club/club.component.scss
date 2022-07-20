@@ -70,8 +70,17 @@
   }
 }
 
-.closed-theme {
+.closed-theme-header {
   padding-top: 15px;
+}
+
+:host ::ng-deep .closed-theme {
+  app-solid-container-with-hover {
+    background-color: #e6e6e6;
+    &:hover {
+      background-color: #bababa;
+    }
+  }
 }
 
 .no-themes-container {

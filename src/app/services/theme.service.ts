@@ -40,7 +40,6 @@ export class ThemeService {
         themeId: themeId,
         nominatorId: nominatorId,
         workId: workId,
-        isbn: "isbn",
         triggerWarnings: triggerWarnings
       })
     );

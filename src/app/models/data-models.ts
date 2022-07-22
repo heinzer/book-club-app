@@ -47,7 +47,6 @@ export enum ThemeStatus {
 export interface NominateBookRequest {
   themeId: string;
   nominatorId: string;
-  isbn: string;
   workId: string;
   triggerWarnings: string;
 }
@@ -67,7 +66,6 @@ export interface INominationEntity {
 
 export interface IBookEntity {
   id: number;
-  isbn: string;
   workId: string;
   triggerWarnings: string;
 }

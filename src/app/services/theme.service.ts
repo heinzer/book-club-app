@@ -35,7 +35,7 @@ export class ThemeService {
 
   // Book Stuff
   nominateBook(themeId: number, nominatorId: number, workId: string, triggerWarnings: string): Observable<IBook> {
-    return this.http.post<IBook>(`${this.themeBaseUrl}/${themeId}/books`,
+    return this.http.post<IBook>(`${this.themeBaseUrl}/${themeId}/books/nominate?userId=${nominatorId}`,
       JSON.stringify({
         themeId: themeId,
         nominatorId: nominatorId,
@@ -43,5 +43,14 @@ export class ThemeService {
         triggerWarnings: triggerWarnings
       })
     );
+  }
+
+  getNominatedBooks(themeId: number, nominatorId?: number): Observable<IBook[]> {
+    const userQueryParam = nominatorId ? `?userId=${nominatorId}` : ''
+    return this.http.get<IBook[]>(`${this.themeBaseUrl}/${themeId}/books/nominate${userQueryParam}`);
+  }
+
+  deleteNominatedBook(themeId: number, userId: string, nominationId: string): Observable<any> {
+    return this.http.delete(`${this.themeBaseUrl}/${themeId}/books/nominate?userId=${userId}&nominationId=${nominationId}`)
   }
 }

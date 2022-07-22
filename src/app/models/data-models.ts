@@ -52,9 +52,13 @@ export interface NominateBookRequest {
 }
 
 export interface IBook {
-  externalBookData: any;
+  externalBookData: IExternalBookData;
   nomination: INominationEntity;
   book: IBookEntity;
+}
+
+export interface IExternalBookData {
+  covers: number[]
 }
 
 export interface INominationEntity {

@@ -1,5 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {IClub, IOpenLibraryDocument, IOpenLibraryResponse, ITheme, IUserMembership} from '../../models/data-models';
+import {
+  IBook,
+  IClub,
+  IOpenLibraryDocument,
+  IOpenLibraryResponse,
+  ITheme,
+  IUserMembership
+} from '../../models/data-models';
 import { CurrentSessionService } from '../../services/current-session.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
@@ -28,9 +35,10 @@ export class ThemeComponent implements OnInit {
   themeId: number;
   clubId: number;
   members: IUserMembership[];
-  nominations = [];
   shouldShowNominationSection: boolean = false;
   isSearching: boolean = false;
+  nominatedBooks: IBook[] = [];
+  usersNominatedBooks: IBook[] = [];
 
   ThemePhase = ThemePhase;
 
@@ -47,6 +55,11 @@ export class ThemeComponent implements OnInit {
       this.clubService.getClub(this.clubId).subscribe(club => this.club = club);
       this.themeService.getTheme(this.themeId).subscribe(theme => this.theme = theme);
       this.clubService.getMembershipsForClub(this.clubId).subscribe(members => this.members = members);
+      this.themeService.getNominatedBooks(this.themeId, this.session.getCurrentUser.id).subscribe(nominations => {
+        console.log(nominations);
+        this.nominatedBooks = nominations;
+        this.usersNominatedBooks = this.nominatedBooks.filter(book => +book.nomination.nominatorId === this.session.getCurrentUser.id);
+      })
     });
 
     this.results$ = this.searchTerms$.pipe(
@@ -80,14 +93,16 @@ export class ThemeComponent implements OnInit {
     this.shouldShowNominationSection = false;
   }
 
-  buildImg(result) {
-    return `https://covers.openlibrary.org/b/id/${result.cover_i}-M.jpg`;
+  buildImg(bookImage: number) {
+    return `https://covers.openlibrary.org/b/id/${bookImage}-M.jpg`;
   }
 
   nominateBook(result) {
     let workId = result.key.replace('/works/','');
     this.themeService.nominateBook(this.themeId, this.session.getCurrentUser.id, workId, "trigger warning")
-    .subscribe(book => console.log('book:',book));
+    .subscribe(book => {
+
+    });
   }
 
   isValidBook(document: IOpenLibraryDocument): boolean {

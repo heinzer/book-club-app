@@ -47,7 +47,20 @@
           </div>
 
           <h4 class="margin-top">Nominated Books</h4>
-          <p *ngIf="nominations.length <= 0">No nominations yet.</p>
+          <div *ngIf="nominatedBooks.length > 0; else no_nominations">
+            <ng-container *ngFor="let book of nominatedBooks">
+              <img class="book-cover" *ngIf="book.externalBookData.covers?.length > 0; else no_image" [src]="buildImg(book.externalBookData.covers[0])">
+              <ng-template #no_image>
+                <img class="book-cover bordered">
+              </ng-template>
+            </ng-container>
+
+          </div>
+          <ng-template #no_nominations>
+            <p>No nominations yet.</p>
+          </ng-template>
+
+
         </div>
 
         <div class="right" *ngIf="members && members.length > 0">
@@ -71,7 +84,7 @@
             <ng-container *ngIf="results.docs.length > 0; else no_results">
               <ng-container *ngFor='let result of results.docs'>
                 <div class="result" *ngIf="isValidBook(result)">
-                  <img class="book-cover" *ngIf="result.cover_i" [src]="buildImg(result)">
+                  <img class="book-cover" *ngIf="result.cover_i" [src]="buildImg(result.cover_i)">
                   <img class="book-cover bordered" *ngIf="!result.cover_i">
                   <div class="result-contents">
                     <div class="left-content">
